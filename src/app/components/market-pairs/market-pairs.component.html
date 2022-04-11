@@ -34,7 +34,6 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <button (click)="openDialog()">Open Popup</button>
     <!-- <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-id">
       <table class="table star-active">
         <thead>
@@ -84,9 +83,9 @@
             <td width="20%"> {{tickerVal.lastPrice}} </td>
             <td width="20%"> {{tickerVal.change || 0}} </td>
             <td width="20%">
-              <button class="btn buy" data-bs-toggle="modal" data-bs-target="#buyModal">Buy</button>
+              <button class="btn buy" (click)="openDialog('buy', tickerVal)">Buy</button>
             </td>
-            <td width="20%"><button class="btn sell">Sell</button></td>
+            <td width="20%"><button class="btn sell" (click)="openDialog('sell', tickerVal)">Sell</button></td>
           </tr>
           <!-- <tr>
             <td><i class="icon ion-md-star"></i> KCS/BTC</td>

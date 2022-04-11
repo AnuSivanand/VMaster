@@ -45,14 +45,16 @@ export class MarketPairsComponent implements OnInit {
     ticker.connect();
   }
 
-  openDialog() {
+  openDialog(type: string, ticker: any) {
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = true;
     this.dialogConfig.data = {
+      type: type,
       id: 123,
       message: 'test message goes here',
-      title: 'title will be here',
-      size: "small"
+      title: type,
+      size: "small",
+      ticker: ticker
     };
 
     const dialogRef = this.dialog.open(BuySellTradeComponent, this.dialogConfig);

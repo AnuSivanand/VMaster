@@ -1,38 +1,94 @@
 <div>
-    <div mat-dialog-title>{{ this.title }}</div>
-    <mat-dialog-content [ngClass]="size">
-      <div class="text-container">
-         {{ data | json }}
-       </div>
-      <div class="text-container">
-        {{ showMoreBtn ? shortMessage : longMessage }}
-        <span *ngIf="showTextView" class="show-text" (click)="showMoreBtn=!showMoreBtn">
-          show {{showMoreBtn ? "more" : "less"}}
-        </span>
-      </div>
-    </mat-dialog-content>
-  
-    <mat-dialog-actions align="end">
-      <button mat-button id="cancel" (click)="cancelClick()">CANCEL</button>
-      <button
-        mat-button
-        id="deleteconfirm"
-        *ngIf="title && !hideActions"
-        [disabled]="disableDelete"
-        (click)="confirmClick()"
-      >
-        {{ title | uppercase }}
-      </button>
-  
-      <button
-        mat-button
-        color="primary"
-        *ngIf="!title && !hideActions"
-        id="confirm"
-        (click)="confirmClick()"
-      >
-        YES
-      </button>
-    </mat-dialog-actions>
-  </div>
-  
+	<mat-dialog-actions align="end">
+		<div class="dialog-close"><a (click)="confirmClick()">
+			<i class="icon ion-md-close"></i>
+		</a></div>
+	</mat-dialog-actions>
+
+	<div mat-dialog-title class="title">{{ this.title }}</div>
+	<mat-dialog-content [ngClass]="size">
+		<div class="text-container">
+			{{ data | json }}
+		</div>
+		<div class="market-trade">
+			<div class="tab-content">
+				<div class="market-trade-buy" *ngIf="data.type == 'buy'">
+					<form>
+						<div class="input-group">
+							<input type="number" class="form-control" placeholder="Price" required />
+							<div class="input-group-append">
+								<span class="input-group-text">BTC</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<input type="number" class="form-control" placeholder="Amount" required />
+							<div class="input-group-append">
+								<span class="input-group-text">ETH</span>
+							</div>
+						</div>
+						<ul class="market-trade-list">
+							<li>
+								<a href="#">25%</a>
+							</li>
+							<li>
+								<a href="#">50%</a>
+							</li>
+							<li>
+								<a href="#">75%</a>
+							</li>
+							<li>
+								<a href="#">100%</a>
+							</li>
+						</ul>
+						<p>Available: <span>0 BTC = 0 USD</span></p>
+						<p>Volume: <span>0 BTC = 0 USD</span></p>
+						<p>Margin: <span>0 BTC = 0 USD</span></p>
+						<p>Fee: <span>0 BTC = 0 USD</span></p>
+						<button type="submit" class="btn buy">Buy</button>
+					</form>
+				</div>
+
+				<!-- SELL -->
+				<div class="market-trade-sell" *ngIf="data.type == 'sell'">
+          <form>
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Price" required />
+              <div class="input-group-append">
+                <span class="input-group-text">BTC</span>
+              </div>
+            </div>
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Amount" required />
+              <div class="input-group-append">
+                <span class="input-group-text">ETH</span>
+              </div>
+            </div>
+            <ul class="market-trade-list">
+              <li>
+                <a href="#">25%</a>
+              </li>
+              <li>
+                <a href="#">50%</a>
+              </li>
+              <li>
+                <a href="#">75%</a>
+              </li>
+              <li>
+                <a href="#">100%</a>
+              </li>
+            </ul>
+            <p>Available: <span>0 BTC = 0 USD</span></p>
+            <p>Volume: <span>0 BTC = 0 USD</span></p>
+            <p>Margin: <span>0 BTC = 0 USD</span></p>
+            <p>Fee: <span>0 BTC = 0 USD</span></p>
+            <button class="btn sell">Sell</button>
+          </form>
+        </div>
+
+
+			</div>
+		</div>
+
+
+	</mat-dialog-content>
+</div>
