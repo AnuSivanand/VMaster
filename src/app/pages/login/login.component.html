@@ -1,0 +1,29 @@
+<div class="vh-100 d-flex justify-content-center">
+  <div class="form-access my-auto">
+    <form [formGroup]="loginForm">
+      <span>Sign In</span>
+      <div class="form-group">
+        <input type="email" class="form-control" placeholder="Email Address" 
+          formControlName="email"  required />
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="Password" 
+        formControlName="password"  required />
+      </div>
+      <div class="text-end">
+        <a routerLink="/reset">Forgot Password?</a>
+      </div>
+      <div class="custom-control form-check">
+        <input type="checkbox" class="form-check-input" id="form-checkbox" />
+        <label class="form-check-label" for="form-checkbox">
+          Remember me
+        </label>
+      </div>
+      <button class="btn btn-primary" (click)="onSignInClick()">Sign In</button>
+    </form>
+    <h2>
+      Don't have an account?
+      <a routerLink="/sign-up">Sign up here</a>
+    </h2>
+  </div>
+</div>

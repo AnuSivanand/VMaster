@@ -1,0 +1,38 @@
+<div>
+    <div mat-dialog-title>{{ this.title }}</div>
+    <mat-dialog-content [ngClass]="size">
+      <div class="text-container">
+         {{ data | json }}
+       </div>
+      <div class="text-container">
+        {{ showMoreBtn ? shortMessage : longMessage }}
+        <span *ngIf="showTextView" class="show-text" (click)="showMoreBtn=!showMoreBtn">
+          show {{showMoreBtn ? "more" : "less"}}
+        </span>
+      </div>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions align="end">
+      <button mat-button id="cancel" (click)="cancelClick()">CANCEL</button>
+      <button
+        mat-button
+        id="deleteconfirm"
+        *ngIf="title && !hideActions"
+        [disabled]="disableDelete"
+        (click)="confirmClick()"
+      >
+        {{ title | uppercase }}
+      </button>
+  
+      <button
+        mat-button
+        color="primary"
+        *ngIf="!title && !hideActions"
+        id="confirm"
+        (click)="confirmClick()"
+      >
+        YES
+      </button>
+    </mat-dialog-actions>
+  </div>
+  
