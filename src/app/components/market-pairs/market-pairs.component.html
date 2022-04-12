@@ -17,13 +17,13 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="mcx-id" data-bs-toggle="tab" data-bs-target="#mcx" type="button" role="tab"
         aria-controls="mcx" aria-selected="false">
-        MCX Futures
+        NSE Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="kcs-id" data-bs-toggle="tab" data-bs-target="#nse" type="button" role="tab"
         aria-controls="kcs" aria-selected="false">
-        NSE Futures
+        MCX Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -69,23 +69,20 @@
     </div> -->
     <div class="tab-pane fade show active" id="mcx" role="tabpanel" aria-labelledby="mcx-id">
       <table class="table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Last Price</th>
-            <th>Change</th>
-            <th colspan="2">Action</th>
-          </tr>
-        </thead>
         <tbody>
           <tr *ngFor="let tickerVal of tickerValues" class="ticker-row">
-            <td  width="20%"><i class="icon ion-md-star"></i> {{tickerVal.instrumentToken}} </td>
-            <td width="20%"> {{tickerVal.lastPrice}} </td>
-            <td width="20%"> {{tickerVal.change || 0}} </td>
-            <td width="20%">
+            <td class="alignleft">{{stockName(tickerVal.instrumentToken)}} </td>
+            <td class="alignleft"> {{tickerVal.lastPrice}} </td>
+            <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td>
+            <td class="alignleft"> {{tickerVal.ohlc.high}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc.low}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc.open}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc.close}}</td>
+            <td class="alignleft"> {{tickerVal.volume}}</td>
+            <td width="10%">
               <button class="btn buy" (click)="openDialog('buy', tickerVal)">Buy</button>
             </td>
-            <td width="20%"><button class="btn sell" (click)="openDialog('sell', tickerVal)">Sell</button></td>
+            <td width="10%"><button class="btn sell" (click)="openDialog('sell', tickerVal)">Sell</button></td>
           </tr>
           <!-- <tr>
             <td><i class="icon ion-md-star"></i> KCS/BTC</td>
