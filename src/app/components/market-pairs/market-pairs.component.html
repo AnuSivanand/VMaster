@@ -67,17 +67,19 @@
         </tbody>
       </table>
     </div> -->
+    <!-- {{favouriteFutureStocks | json}} -->
     <div class="tab-pane fade show active" id="mcx" role="tabpanel" aria-labelledby="mcx-id">
       <table class="table">
         <tbody>
-          <tr *ngFor="let tickerVal of tickerValues" class="ticker-row">
-            <td class="alignleft">{{stockName(tickerVal.instrumentToken)}} </td>
+          <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
+            <td class="alignleft">{{tickerVal.stockName}} </td>
             <td class="alignleft"> {{tickerVal.lastPrice}} </td>
-            <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td>
-            <td class="alignleft"> {{tickerVal.ohlc.high}}</td>
-            <td class="alignleft"> {{tickerVal.ohlc.low}}</td>
-            <td class="alignleft"> {{tickerVal.ohlc.open}}</td>
-            <td class="alignleft"> {{tickerVal.ohlc.close}}</td>
+            <td class="alignleft"> {{tickerVal.change}} </td>
+            <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> -->
+            <td class="alignleft"> {{tickerVal.ohlc?.high || 0}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc?.low || 0}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc?.open || 0}}</td>
+            <td class="alignleft"> {{tickerVal.ohlc?.close || 0}}</td>
             <td class="alignleft"> {{tickerVal.volume}}</td>
             <td width="10%">
               <button class="btn buy" (click)="openDialog('buy', tickerVal)">Buy</button>
@@ -381,7 +383,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
