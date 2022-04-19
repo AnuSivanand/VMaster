@@ -5,45 +5,29 @@
 		</a></div>
 	</mat-dialog-actions>
 
-	<div mat-dialog-title class="title">{{ this.title }}</div>
+	<div mat-dialog-title class="title">{{ data.ticker.stockName}}</div>
 	<mat-dialog-content [ngClass]="size">
 		<div class="text-container">
-			{{ data | json }}
 		</div>
 		<div class="market-trade">
 			<div class="tab-content">
 				<div class="market-trade-buy" *ngIf="data.type == 'buy'">
 					<form>
 						<div class="input-group">
-							<input type="number" class="form-control" placeholder="Price" required />
-							<div class="input-group-append">
-								<span class="input-group-text">BTC</span>
-							</div>
+							<input type="number" class="form-control" placeholder="Quantity" required />
 						</div>
 						<div class="input-group">
-							<input type="number" class="form-control" placeholder="Amount" required />
-							<div class="input-group-append">
-								<span class="input-group-text">ETH</span>
-							</div>
+							<input type="number" value="{{ data.ticker.lastPrice}}" class="form-control" placeholder="Amount" required />
 						</div>
-						<ul class="market-trade-list">
-							<li>
-								<a href="#">25%</a>
-							</li>
-							<li>
-								<a href="#">50%</a>
-							</li>
-							<li>
-								<a href="#">75%</a>
-							</li>
-							<li>
-								<a href="#">100%</a>
-							</li>
-						</ul>
-						<p>Available: <span>0 BTC = 0 USD</span></p>
-						<p>Volume: <span>0 BTC = 0 USD</span></p>
-						<p>Margin: <span>0 BTC = 0 USD</span></p>
-						<p>Fee: <span>0 BTC = 0 USD</span></p>
+						<p>Change: <span>{{data.ticker.change}}</span></p>
+						<p>High: <span>{{data.ticker.ohlc.high}}</span></p>
+						<p>Low: <span>{{data.ticker.ohlc.low}}</span></p>
+						<p>Open: <span>{{data.ticker.ohlc.open}}</span></p>
+						<p>Close: <span>{{data.ticker.ohlc.close}}</span></p>
+						<p>Volume: <span>{{data.ticker.volume}}</span></p>
+						<p>Avg Price: <span>{{data.ticker.averagePrice}}</span></p>
+						<p>Buy Quantity: <span>{{data.ticker.buyQuantity}}</span></p>
+						<p>Sell Quantity: <span>{{data.ticker.sellQuantity}}</span></p>
 						<button type="submit" class="btn buy">Buy</button>
 					</form>
 				</div>
@@ -52,35 +36,21 @@
 				<div class="market-trade-sell" *ngIf="data.type == 'sell'">
           <form>
             <div class="input-group">
-              <input type="number" class="form-control" placeholder="Price" required />
-              <div class="input-group-append">
-                <span class="input-group-text">BTC</span>
-              </div>
+              <input type="number" class="form-control" placeholder="Quantity" required />
             </div>
             <div class="input-group">
-              <input type="number" class="form-control" placeholder="Amount" required />
-              <div class="input-group-append">
-                <span class="input-group-text">ETH</span>
-              </div>
+              <input type="number" value="{{ data.ticker.lastPrice}}" class="form-control" placeholder="Amount" required />
             </div>
-            <ul class="market-trade-list">
-              <li>
-                <a href="#">25%</a>
-              </li>
-              <li>
-                <a href="#">50%</a>
-              </li>
-              <li>
-                <a href="#">75%</a>
-              </li>
-              <li>
-                <a href="#">100%</a>
-              </li>
-            </ul>
-            <p>Available: <span>0 BTC = 0 USD</span></p>
-            <p>Volume: <span>0 BTC = 0 USD</span></p>
-            <p>Margin: <span>0 BTC = 0 USD</span></p>
-            <p>Fee: <span>0 BTC = 0 USD</span></p>
+            
+            <p>Change: <span>{{data.ticker.change}}</span></p>
+						<p>High: <span>{{data.ticker.ohlc.high}}</span></p>
+						<p>Low: <span>{{data.ticker.ohlc.low}}</span></p>
+						<p>Open: <span>{{data.ticker.ohlc.open}}</span></p>
+						<p>Close: <span>{{data.ticker.ohlc.close}}</span></p>
+						<p>Volume: <span>{{data.ticker.volume}}</span></p>
+						<p>Avg Price: <span>{{data.ticker.averagePrice}}</span></p>
+						<p>Buy Quantity: <span>{{data.ticker.buyQuantity}}</span></p>
+						<p>Sell Quantity: <span>{{data.ticker.sellQuantity}}</span></p>
             <button class="btn sell">Sell</button>
           </form>
         </div>

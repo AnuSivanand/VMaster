@@ -25,7 +25,8 @@ export class MarketPairsComponent implements OnInit {
       { "id": 408065, "stockName": "INFY" },
       { "id": 884737, "stockName": "TATA Motors" },
       { "id": 2953217, "stockName": "TCS" },
-      { "id": 341249, "stockName": "HDFCBANK" }
+      { "id": 341249, "stockName": "HDFCBANK"},
+      { "id": 60445703, "stockName": "GOLDM"}
     ];
   }
 
