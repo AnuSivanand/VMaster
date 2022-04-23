@@ -16,6 +16,7 @@ export class MarketPairsComponent implements OnInit {
   public tickerValues: any;
   public dialogConfig: MatDialogConfig;
   public favouriteFutureStocks: any;
+  public selectedStock: any;
 
   constructor(
     private dialog: MatDialog,

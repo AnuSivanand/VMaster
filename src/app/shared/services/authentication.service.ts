@@ -16,7 +16,7 @@ export class AuthenticationService {
   redirect(loginResponse: any) {
     // ToDo: clean this up, also it's possible a user won't have access to synthesizer so validate path first.
     if (loginResponse) {
-      return this.router.navigate(["/exchange"]);
+      return this.router.navigate(["/vmaster/watchlist"]);
     } else {
       return this.router.navigate(["/not-found"]);
     }

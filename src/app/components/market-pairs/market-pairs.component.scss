@@ -1,7 +1,6 @@
 .ticker-row {
 	cursor: pointer;
 }
-
 button.buy {
 	width: 100px;
 	background: #26de81;
@@ -10,7 +9,6 @@ button.buy {
 	padding: 10px;
 	box-shadow: 0px 0px 15px 0px #26de81ad;
 }
-
 button.sell {
 	width: 100px;
 	background: #ff231f;
@@ -19,9 +17,10 @@ button.sell {
 	padding: 10px;
 	box-shadow: 0px 0px 15px 0px #ff231fad;
 }
-
 .title {
 	text-transform: capitalize;
 }
-
-
+.watchlist-search {
+	width: 100%;
+}
+.ng-placeholder {}

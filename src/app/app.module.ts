@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { HistoryOrderComponent } from './components/history-order/history-order.component';
 import { MarketCarouselComponent } from './components/market-carousel/market-carousel.component';
 import { MarketHistoryComponent } from './components/market-history/market-history.component';
@@ -32,10 +31,17 @@ import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-
 import { WalletComponent } from './pages/wallet/wallet.component';
 import { TradingDarkChartComponent } from './components/trading-dark-chart/trading-dark-chart.component';
 import { BuySellTradeComponent } from './components/buy-sell-trade/buy-sell-trade.component';
+
+import { NgSelectModule } from '@ng-select/ng-select';
+
+import { PagesWrapperModule } from './pages/pages-wrapper/pages-wrapper.module';
+import { TradesComponent } from './pages/trades/trades.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { WatchlistFilterPipe } from './pages/exchange/filters/watchlist-filter.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     HistoryOrderComponent,
     MarketCarouselComponent,
     MarketHistoryComponent,
@@ -61,15 +67,20 @@ import { BuySellTradeComponent } from './components/buy-sell-trade/buy-sell-trad
     WalletComponent,
     TradingDarkChartComponent,
     BuySellTradeComponent,
+    TradesComponent,
+    PortfolioComponent,
+    WatchlistFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgSelectModule,
     IvyCarouselModule,
     BrowserAnimationsModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PagesWrapperModule
   ],
   providers: [],
   bootstrap: [AppComponent],
