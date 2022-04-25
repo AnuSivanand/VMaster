@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { KiteTicker } from 'kiteconnect-ts';
 import { TickFull } from 'kiteconnect-ts/dist/types/ticker';
@@ -16,22 +17,45 @@ export class MarketPairsComponent implements OnInit {
   public tickerValues: any;
   public dialogConfig: MatDialogConfig;
   public favouriteFutureStocks: any;
-  public selectedStock: any;
+  public futureStockList: any;
+
+  public selectedStocks = [];
+  public dropdownSettings: IDropdownSettings = {};
+  public loading: boolean = false;
 
   constructor(
     private dialog: MatDialog,
   ) {
     this.dialogConfig = new MatDialogConfig();
+    this.futureStockList = [
+      { "id": 408064, "stockName": "Asian Paints" },
+      { "id": 884736, "stockName": "Bajaj Finserv" },
+      { "id": 2953216, "stockName": "Cipla" },
+      { "id": 341248, "stockName": "Eicher Motors" },
+      { "id": 60445702, "stockName": "Hindalco" }
+    ];
     this.favouriteFutureStocks = [
       { "id": 408065, "stockName": "INFY" },
       { "id": 884737, "stockName": "TATA Motors" },
       { "id": 2953217, "stockName": "TCS" },
-      { "id": 341249, "stockName": "HDFCBANK"},
-      { "id": 60445703, "stockName": "GOLDM"}
+      { "id": 341249, "stockName": "HDFCBANK" },
+      { "id": 60445703, "stockName": "GOLDM" }
     ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'stockName',
+      enableCheckAll: false,
+      allowSearchFilter: true
+    };
   }
 
   ngOnInit(): void {
+    this.getStockListValues();
+  }
+
+  getStockListValues() {
+    this.loading = true;
     let exchangeIds = this.favouriteFutureStocks.map((item: any) => item.id);
     if (exchangeIds) {
       this.getTickerValues(exchangeIds);
@@ -46,10 +70,9 @@ export class MarketPairsComponent implements OnInit {
     ticker.on('ticks', (ticks: TickFull) => {
       this.tickerValues = ticks;
       console.log('tickerValues ---> ', this.tickerValues);
-
       this.favouriteFutureStocks = this.favouriteFutureStocks.map((item: any) => {
         let currentItem = this.tickerValues.find((newItem: any) => {
-          return item.id === newItem.instrumentToken
+          return item.id === newItem.instrumentToken;
         });
         if (currentItem) {
           return {
@@ -62,7 +85,7 @@ export class MarketPairsComponent implements OnInit {
             lastPrice: (currentItem && currentItem.lastPrice) ? currentItem.lastPrice : 0,
             lastQuantity: (currentItem && currentItem.lastQuantity) ? currentItem.lastQuantity : 0,
             lastTradeTime: (currentItem && currentItem.lastTradeTime) ? currentItem.lastTradeTime : {},
-            mode: (currentItem && currentItem.mode) ? currentItem.mode : 0,          
+            mode: (currentItem && currentItem.mode) ? currentItem.mode : 0,
             ohlc: (currentItem && currentItem.ohlc) ? currentItem.ohlc : {},
             oi: (currentItem && currentItem.oi) ? currentItem.oi : 0,
             oiDayHigh: (currentItem && currentItem.oiDayHigh) ? currentItem.oiDayHigh : {},
@@ -76,10 +99,7 @@ export class MarketPairsComponent implements OnInit {
         } else {
           return item;
         }
-        
       });
-
-
       console.log(this.favouriteFutureStocks)
     });
 
@@ -88,6 +108,7 @@ export class MarketPairsComponent implements OnInit {
       ticker.setMode(ticker.modeFull, items);
     });
     ticker.connect();
+    this.loading = false;
   }
 
   openDialog(type: string, ticker: any) {
@@ -101,17 +122,28 @@ export class MarketPairsComponent implements OnInit {
       size: "small",
       ticker: ticker
     };
-
     const dialogRef = this.dialog.open(BuySellTradeComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((data) => { });
   }
 
-  // stockName(type: any) {
-  //   if (type == '341249') { return 'HDFCBANK'; }
-  //   else if (type == '2953217') { return 'TCS'; }
-  //   else if (type == '884737') { return 'TATA Motors'; }
-  //   else if (type == '408065') { return 'INFY'; }
-  //   else { return "No Name"; }
-  // }
+  onItemSelect(item: any) {
+    console.log(item);
+    this.favouriteFutureStocks.push(item);
+    // this.futureStockList = this.futureStockList.filter((element: any) => element.id !== item.id);
+    // // this.futureStockList = this.futureStockList.filter((element: any) => element.id === item.id);
+    // console.log(this.futureStockList);
+    // 
+  }
 
+  onDropDownClose() {
+    console.log(this.selectedStocks);
+    for (let i = 0; i < this.selectedStocks.length; i++) {
+      this.futureStockList = this.futureStockList.filter((element: any) => element.id !== this.selectedStocks[i]['id']);
+    }
+    this.selectedStocks = [];
+  }
+
+  onItemDeSelect(item: any) {
+    console.log(item);
+  }
 }

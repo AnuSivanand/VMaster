@@ -1,13 +1,12 @@
+<div *ngIf="loading" class="loading-indicator"></div>
 <div class="market-pairs">
   <div class="input-group">
-    <!-- <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-sm">
-        <i class="icon ion-md-search"></i>
-      </span>
-    </div>
-    <input type="text" class="form-control" placeholder="Search" aria-describedby="inputGroup-sizing-sm" /> -->
-    <ng-select class="watchlist-search" placeholder="Search" [items]="favouriteFutureStocks" bindLabel="stockName"
-      bindValue="id" [(ngModel)]="selectedStock"></ng-select>
+
+    <ng-multiselect-dropdown class="watchlist-search" [placeholder]="'Search and Add'" [settings]="dropdownSettings"
+      [data]="futureStockList" [(ngModel)]="selectedStocks" (onSelect)="onItemSelect($event)"
+      (onDeSelect)="onItemDeSelect($event)" (onDropDownClose)="onDropDownClose()">
+    </ng-multiselect-dropdown>
+
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
@@ -47,7 +46,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let tickerVal of favouriteFutureStocks | watchlistFilter: selectedStock" class="ticker-row">
+          <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
             <td width="10%">{{tickerVal.stockName}} </td>
             <td width="10%"> {{tickerVal.lastPrice}} </td>
             <td width="10%"> {{tickerVal.change}}%</td>

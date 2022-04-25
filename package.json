@@ -26,6 +26,7 @@
     "angular-responsive-carousel": "^2.1.2",
     "bootstrap": "^5.1.0",
     "kiteconnect-ts": "^0.2.0",
+    "ng-multiselect-dropdown": "^0.3.8",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

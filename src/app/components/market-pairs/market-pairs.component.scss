@@ -23,4 +23,11 @@ button.sell {
 .watchlist-search {
 	width: 100%;
 }
+.stocklist-wrapper {
+  width: 100%;
+}
+// .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+span.selected-item {
+	max-width: auto !important;
+}
 .ng-placeholder {}

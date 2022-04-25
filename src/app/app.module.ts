@@ -33,6 +33,7 @@ import { TradingDarkChartComponent } from './components/trading-dark-chart/tradi
 import { BuySellTradeComponent } from './components/buy-sell-trade/buy-sell-trade.component';
 
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import { PagesWrapperModule } from './pages/pages-wrapper/pages-wrapper.module';
 import { TradesComponent } from './pages/trades/trades.component';
@@ -75,6 +76,7 @@ import { WatchlistFilterPipe } from './pages/exchange/filters/watchlist-filter.p
     BrowserModule,
     AppRoutingModule,
     NgSelectModule,
+    NgMultiSelectDropDownModule.forRoot(),
     IvyCarouselModule,
     BrowserAnimationsModule,
     MatDialogModule,
