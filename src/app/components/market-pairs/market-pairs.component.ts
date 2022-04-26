@@ -28,18 +28,29 @@ export class MarketPairsComponent implements OnInit {
   ) {
     this.dialogConfig = new MatDialogConfig();
     this.futureStockList = [
-      { "id": 408064, "stockName": "Asian Paints" },
-      { "id": 884736, "stockName": "Bajaj Finserv" },
-      { "id": 2953216, "stockName": "Cipla" },
-      { "id": 341248, "stockName": "Eicher Motors" },
-      { "id": 60445702, "stockName": "Hindalco" }
+      { "id": 60417, "stockName": "Asian Paints" },
+      { "id": 4268801, "stockName": "Bajaj Finserv" },
+      { "id": 177665, "stockName": "Cipla" },
+      { "id": 232961, "stockName": "Eicher Motors" },
+      { "id": 348929, "stockName": "Hindalco" },
+      { "id": 232961, "stockName": "Eicher Motors" },
+      { "id": 1793, "stockName": "AARTI INDUSTRIES" },
+      { "id": 4583169, "stockName": "ABBOTT INDIA" },
+      { "id": 7707649, "stockName": "ADITYA BIRLA FASHION & RT" },
+      { "id": 6401, "stockName": "ADANI ENTERPRISES" },
+      { "id": 3861249, "stockName": "ADANI PORT & SEZ" },
+      { "id": 41729, "stockName": "APOLLO TYRES" },
+      { "id": 54273, "stockName": "ASHOK LEYLAND" },
+      { "id": 4267265, "stockName": "BAJAJ AUTO" },
+      { "id": 4268801, "stockName": "BAJAJ FINSERV." },
+      { "id": 2714625, "stockName": "BHARTI AIRTEL" }
     ];
     this.favouriteFutureStocks = [
       { "id": 408065, "stockName": "INFY" },
       { "id": 884737, "stockName": "TATA Motors" },
       { "id": 2953217, "stockName": "TCS" },
-      { "id": 341249, "stockName": "HDFCBANK" },
-      { "id": 60445703, "stockName": "GOLDM" }
+      { "id": 341249, "stockName": "HDFCBANK" }
+    //  { "id": 60445703, "stockName": "GOLDM" }
     ];
     this.dropdownSettings = {
       singleSelection: false,
@@ -57,6 +68,7 @@ export class MarketPairsComponent implements OnInit {
   getStockListValues() {
     this.loading = true;
     let exchangeIds = this.favouriteFutureStocks.map((item: any) => item.id);
+    console.log(exchangeIds);
     if (exchangeIds) {
       this.getTickerValues(exchangeIds);
     }
@@ -69,7 +81,7 @@ export class MarketPairsComponent implements OnInit {
     });
     ticker.on('ticks', (ticks: TickFull) => {
       this.tickerValues = ticks;
-      console.log('tickerValues ---> ', this.tickerValues);
+      //console.log('tickerValues ---> ', this.tickerValues);
       this.favouriteFutureStocks = this.favouriteFutureStocks.map((item: any) => {
         let currentItem = this.tickerValues.find((newItem: any) => {
           return item.id === newItem.instrumentToken;
@@ -100,7 +112,7 @@ export class MarketPairsComponent implements OnInit {
           return item;
         }
       });
-      console.log(this.favouriteFutureStocks)
+      //console.log(this.favouriteFutureStocks)
     });
 
     ticker.on('connect', () => {
@@ -129,6 +141,7 @@ export class MarketPairsComponent implements OnInit {
   onItemSelect(item: any) {
     console.log(item);
     this.favouriteFutureStocks.push(item);
+    this.ngOnInit();
     // this.futureStockList = this.futureStockList.filter((element: any) => element.id !== item.id);
     // // this.futureStockList = this.futureStockList.filter((element: any) => element.id === item.id);
     // console.log(this.futureStockList);

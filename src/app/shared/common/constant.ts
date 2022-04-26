@@ -1,4 +1,4 @@
 export const Constants = {
 	API_KEY: 'bxgemb4liqbi58ki',
-	ACCESS_TOKEN: 'iH7MXW5MjnFmr5rhu4iEKQGWNgjxmvUl'
+	ACCESS_TOKEN: 'Kmlf9jhIkFQnZ09MbyudBr1BYl8r9ol3'
 };
