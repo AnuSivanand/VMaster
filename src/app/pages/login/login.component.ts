@@ -13,26 +13,31 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private loginFormBuilder: FormBuilder,
-    private authService:AuthenticationService
+    private authService: AuthenticationService
   ) {
     this.loginForm = this.loginFormBuilder.group({
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
-   }
+  }
 
-   ngOnInit(): void { }
+  ngOnInit(): void { }
 
-   onSignInClick() {
+  onSignInClick() {
     let loginCredentials = this.loginForm.getRawValue();
-    console.log(loginCredentials)
     if (loginCredentials.email && loginCredentials.password) {
-      this.gotoExchange(loginCredentials);
+      this.authService.login(loginCredentials)
+        .subscribe(this.onLoginSuccess.bind(this),
+          this.onLoginFailure.bind(this));
     }
   }
 
-  gotoExchange(loginCredentials: any) {
-    this.authService.redirect(loginCredentials);
+  onLoginSuccess(resp: any) {
+    console.log(resp);
+  }
+
+  onLoginFailure(error: any) {
+    console.log(error);
   }
 
 }

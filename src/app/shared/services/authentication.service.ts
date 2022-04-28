@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,15 @@ export class AuthenticationService {
   private baseUrl = "/";
 
   constructor(
+    private httpClient: HttpClient,
     private router: Router,
   ) { }
 
+  login(user: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "loginUser", user);
+  }
+
   redirect(loginResponse: any) {
-    // ToDo: clean this up, also it's possible a user won't have access to synthesizer so validate path first.
     if (loginResponse) {
       return this.router.navigate(["/vmaster/watchlist"]);
     } else {
