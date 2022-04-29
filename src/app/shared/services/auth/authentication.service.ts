@@ -19,4 +19,8 @@ export class AuthenticationService {
     return this.httpClient.post(this.baseUrl + "login", user);
   }
 
+  loginSuccess(loginResp: any) {
+    localStorage.setItem("access_token", loginResp.token);
+  }
+
 }

@@ -7,7 +7,7 @@ button.buy {
 	color: #fff;
 	text-transform: uppercase;
 	padding: 10px;
-	box-shadow: 0px 0px 15px 0px #26de81ad;
+	box-shadow: 0px 0px 5px 0px #26de81ad;
 }
 button.sell {
 	width: 100px;
@@ -15,7 +15,7 @@ button.sell {
 	color: #fff;
 	text-transform: uppercase;
 	padding: 10px;
-	box-shadow: 0px 0px 15px 0px #ff231fad;
+	box-shadow: 0px 0px 5px 0px #ff231fad;
 }
 .title {
 	text-transform: capitalize;
@@ -29,5 +29,8 @@ button.sell {
 // .multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
 span.selected-item {
 	max-width: auto !important;
+}
+.icon {
+	font-size: xx-large;
 }
 .ng-placeholder {}

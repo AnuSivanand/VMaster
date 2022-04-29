@@ -4,7 +4,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +41,9 @@ import { PagesWrapperModule } from './pages/pages-wrapper/pages-wrapper.module';
 import { TradesComponent } from './pages/trades/trades.component';
 import { PortfolioComponent } from './pages/portfolio/portfolio.component';
 import { WatchlistFilterPipe } from './pages/exchange/filters/watchlist-filter.pipe';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -82,12 +85,24 @@ import { WatchlistFilterPipe } from './pages/exchange/filters/watchlist-filter.p
     NgMultiSelectDropDownModule.forRoot(),
     IvyCarouselModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
     PagesWrapperModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -2,28 +2,30 @@
 <div class="market-pairs">
   <div class="input-group">
 
-    <ng-multiselect-dropdown class="watchlist-search" [placeholder]="'Search and Add'" [settings]="dropdownSettings"
-      [data]="futureStockList" [(ngModel)]="selectedStocks" (onSelect)="onItemSelect($event)"
-      (onDeSelect)="onItemDeSelect($event)" (onDropDownClose)="onDropDownClose()">
+    <ng-multiselect-dropdown 
+      class="watchlist-search" [placeholder]="'Search and Add'" 
+      [settings]="dropdownSettings" [data]="futureStockList" 
+      [(ngModel)]="selectedStocks" (onDeSelect)="onItemDeSelect($event)" 
+      (onDropDownClose)="onDropDownClose()">
     </ng-multiselect-dropdown>
 
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="mcx-id" data-bs-toggle="tab" data-bs-target="#mcx" type="button" role="tab"
-        aria-controls="mcx" aria-selected="false">
+        aria-controls="mcx" aria-selected="false" (click)="onNavSelect('NFO')">
         NSE Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="kcs-id" data-bs-toggle="tab" data-bs-target="#nse" type="button" role="tab"
-        aria-controls="kcs" aria-selected="false">
+        aria-controls="kcs" aria-selected="false" (click)="onNavSelect('MCX')">
         MCX Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="usdt-id" data-bs-toggle="tab" data-bs-target="#other" type="button" role="tab"
-        aria-controls="usdt" aria-selected="false">
+        aria-controls="usdt" aria-selected="false" (click)="onNavSelect('OTH')">
         Other
       </button>
     </li>
@@ -43,23 +45,33 @@
             <th>Volume</th>
             <th>Sell</th>
             <th>Buy</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
-            <td width="10%">{{tickerVal.stockName}} </td>
-            <td width="10%"> {{tickerVal.lastPrice}} </td>
-            <td width="10%"> {{tickerVal.change}}%</td>
+            <td width="13%">{{tickerVal.stockName}} </td>
+            <td width="9%"> {{tickerVal.lastPrice}} </td>
+            <td width="9%"> {{tickerVal.change}}%</td>
             <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> -->
-            <td width="10%"> {{tickerVal.ohlc?.high || 0}}</td>
-            <td width="10%"> {{tickerVal.ohlc?.low || 0}}</td>
-            <td width="10%"> {{tickerVal.ohlc?.open || 0}}</td>
-            <td width="10%"> {{tickerVal.ohlc?.close || 0}}</td>
-            <td width="10%"> {{tickerVal.volume}}</td>
-            <td width="10%">
-              <button class="btn buy" (click)="openDialog('buy', tickerVal)">Buy</button>
+            <td width="9%"> {{tickerVal.ohlc?.high || 0}}</td>
+            <td width="9%"> {{tickerVal.ohlc?.low || 0}}</td>
+            <td width="9%"> {{tickerVal.ohlc?.open || 0}}</td>
+            <td width="9%"> {{tickerVal.ohlc?.close || 0}}</td>
+            <td width="9%"> {{tickerVal.volume}}</td>
+            <td width="9%">
+              <button class="btn buy" 
+                (click)="openDialog('buy', tickerVal)">Buy</button>
             </td>
-            <td width="10%"><button class="btn sell" (click)="openDialog('sell', tickerVal)">Sell</button></td>
+            <td width="9%">
+              <button class="btn sell" 
+                (click)="openDialog('sell', tickerVal)">Sell</button>
+            </td>
+            <td width="3%">
+              <div (click)="onDeleteStockItem(tickerVal)">
+                <i class="icon ion-ios-trash"></i>
+              </div>
+            </td>
           </tr>
           <!-- <tr>
             <td><i class="icon ion-md-star"></i> KCS/BTC</td>
