@@ -18,6 +18,7 @@
           Remember me
         </label>
       </div> -->
+      <div class="error-msg">{{errorMessage}}</div>
       <button class="btn btn-primary" [disabled]="!(loginForm.valid && loginForm.dirty)" (click)="onSignInClick()">Sign
         In</button>
     </form>

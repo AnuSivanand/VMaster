@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,10 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public errorMessage: String = "";
 
   constructor(
+    private router: Router,
     private loginFormBuilder: FormBuilder,
     private authService: AuthenticationService
   ) {
@@ -24,6 +27,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void { }
 
   onSignInClick() {
+    this.errorMessage = '';
     let loginCredentials = this.loginForm.getRawValue();
     if (loginCredentials.email && loginCredentials.password) {
       this.authService.login(loginCredentials)
@@ -33,11 +37,19 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSuccess(resp: any) {
-    console.log(resp);
+    console.log('resp ---> ', resp);
+    if (resp && resp.success) {
+      this.router.navigate(["/vmaster/watchlist"]);
+    }
   }
 
   onLoginFailure(error: any) {
-    console.log(error);
+    console.log('error ---> ', error, error.error, error.error.message);
+    if (error && error.error && error.error.message) {
+      this.errorMessage = error.error.message;
+    } else {
+      this.errorMessage = 'Invalid login';
+    }
   }
 
 }
