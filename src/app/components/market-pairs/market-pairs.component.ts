@@ -45,18 +45,21 @@ export class MarketPairsComponent implements OnInit {
   }
 
   getWatchlist() {
+    this.loading = true;
     this.apiService.getWatchlistStocks(this.exchangeType)
       .subscribe(this.onGetWatchlistSuccess.bind(this));
   }
 
   onGetWatchlistSuccess(resp: any) {
     console.log(resp);
-    if (resp && resp.status) {      
+    if (resp && resp.status) {
       this.futureStockList = resp.instruments;
+      this.loading = false;
     }
   }
 
   getFavouriteFutureList() {
+    this.loading = true;
     this.apiService.getFavuoriteStocks(this.exchangeType)
       .subscribe(this.onGetFavouriteFutureListSuccess.bind(this));
 
@@ -66,12 +69,12 @@ export class MarketPairsComponent implements OnInit {
     console.log(resp);
     if (resp && resp.status) {
       this.favouriteFutureStocks = resp.favourites;
+      this.loading = false;
       this.getStockListValues();
     }
   }
 
   getStockListValues() {
-    this.loading = true;
     let exchangeIds = this.favouriteFutureStocks.map((item: any) => item.instrument_token);
     if (exchangeIds) {
       this.getTickerValues(exchangeIds);
@@ -79,6 +82,7 @@ export class MarketPairsComponent implements OnInit {
   }
 
   getTickerValues(items: any) {
+    this.loading = true;
     let ticker = new KiteTicker({
       apiKey: Constants.API_KEY,
       accessToken: Constants.ACCESS_TOKEN
@@ -116,7 +120,6 @@ export class MarketPairsComponent implements OnInit {
         }
       });
     });
-
     ticker.on('connect', () => {
       ticker.subscribe(items);
       ticker.setMode(ticker.modeFull, items);
@@ -153,16 +156,18 @@ export class MarketPairsComponent implements OnInit {
       "instruments": this.selectedStocks.map((item: any) => item.instrument_token),
       "type": this.exchangeType
     };
-    this.apiService.addFavouriteStocks(favList).subscribe((resp) => {
-      console.log(resp);
-      this.favouriteFutureStocks = resp.favourites;
-      this.futureStockList = resp.instruments;
-      this.selectedStocks = [];
-      setTimeout(() => {
-        this.ngOnInit();
-      }, 500);
-    });
-    
+    if (this.selectedStocks && this.selectedStocks.length) {
+      this.loading = true;
+      this.apiService.addFavouriteStocks(favList).subscribe((resp) => {
+        this.favouriteFutureStocks = resp.favourites;
+        this.futureStockList = resp.instruments;
+        this.selectedStocks = [];
+        setTimeout(() => {
+          this.loading = false;
+          this.ngOnInit();
+        }, 500);
+      });
+    }
   }
 
   onItemDeSelect(item: any) {

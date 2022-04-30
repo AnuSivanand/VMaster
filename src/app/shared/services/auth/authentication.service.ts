@@ -13,6 +13,7 @@ export class AuthenticationService {
 
   constructor(
     private httpClient: HttpClient,
+    private router: Router
   ) { }
 
   login(user: any): Observable<any> {
@@ -21,6 +22,17 @@ export class AuthenticationService {
 
   loginSuccess(loginResp: any) {
     localStorage.setItem("access_token", loginResp.token);
+    sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
+  }
+  
+  logout(): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "logout", {});
+  }
+
+  finishLogout() {
+    localStorage.removeItem("access_token");
+    sessionStorage.removeItem("current_user");
+    this.router.navigateByUrl("/login");
   }
 
 }

@@ -7,14 +7,16 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../services/auth/authentication.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
   constructor(
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthenticationService
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -39,15 +41,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               break;
             case 401:
               this.toastrService.error(response.error.message ? response.error.message : "Unauthorised access");
+              console.log(response, 'kkk')
               if (response.error) {                
-                  // Logout                
+                this.authService.logout().subscribe((resp) => {
+                  this.authService.finishLogout();
+                });      
               }
               break;
             default:
               break;
           }
         }
-        return Observable.throw(response);
+        return throwError(response);
       })
     );
   }
