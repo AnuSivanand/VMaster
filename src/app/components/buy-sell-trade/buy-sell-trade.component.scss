@@ -1,10 +1,56 @@
 .dialog-close {
-	// width: 30px;
-	// height: 30px;
-	font-size: 24px;
+	font-size: 20px;
+	font-weight: bold;
 	cursor: pointer;
 }
-
-.dialog-close:hover {
-	background-color: gray;
+.popup {
+	width: 500px;
+}
+.popup-title {
+	font-size: 20px;
+	font-weight: 600;
+}
+.title {
+	font-weight: 600;
+	font-size: 18px;
+	display: block;
+}
+.text-container {
+	text-align: center;
+}
+.equity-market-label {
+	font-size: 40px;
+  padding-right: 10px;
+}
+.equity-order-label {
+	font-size: 22px;
+  padding-right: 10px;
+}
+.trade-buy {
+	padding: 10px;
+}
+.input-group {
+	margin: 10px 0;
+}
+button.buy {
+	width: 200px;
+	background: #26de81;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 10px;
+	box-shadow: 0px 0px 5px 0px #26de81ad;
+}
+button.sell {
+	width: 200px;
+	background: #ff231f;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 10px;
+	box-shadow: 0px 0px 5px 0px #ff231fad;
+}
+.submit-btn-wrap {
+	text-align: center;
+}
+.ticker-val-wrap {
+	text-align: center;
 }

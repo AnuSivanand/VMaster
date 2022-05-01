@@ -1,64 +1,85 @@
-<div>
-	<mat-dialog-actions align="end">
-		<div class="dialog-close"><a (click)="confirmClick()">
-			<i class="icon ion-md-close"></i>
-		</a></div>
-	</mat-dialog-actions>
-
-	<div mat-dialog-title class="title">{{ data.ticker.stockName}}</div>
-	<mat-dialog-content [ngClass]="size">
+<div class="popup">
+	<div align="end">
+		<a (click)="confirmClick()">
+			<i class="icon ion-md-close dialog-close"></i>
+		</a>
+	</div>
+	<div class="popup-title">Equity Trade</div>
+	<mat-dialog-content>
 		<div class="text-container">
+			<span class="title">{{ data.ticker.stockName}}</span>
+			<mat-button-toggle-group name="equityType" #group="matButtonToggleGroup" [value]="equityType"
+				(change)="onValChange($event.value)">
+				<mat-button-toggle value="market">
+					<span class="equity-market-label"><i class="icon ion-ios-checkmark"></i></span>Market
+				</mat-button-toggle>
+				<mat-button-toggle value="order">
+					<span class="equity-order-label"><i class="icon ion-md-time"></i></span>Order
+				</mat-button-toggle>
+			</mat-button-toggle-group>
 		</div>
-		<div class="market-trade">
-			<div class="tab-content">
-				<div class="market-trade-buy" *ngIf="data.type == 'buy'">
-					<form>
-						<div class="input-group">
-							<input type="number" class="form-control" placeholder="Quantity" required />
-						</div>
-						<div class="input-group">
-							<input type="number" value="{{ data.ticker.lastPrice}}" class="form-control" placeholder="Amount" required />
-						</div>
-						<p>Change: <span>{{data.ticker.change}}</span></p>
-						<p>High: <span>{{data.ticker.ohlc.high}}</span></p>
-						<p>Low: <span>{{data.ticker.ohlc.low}}</span></p>
-						<p>Open: <span>{{data.ticker.ohlc.open}}</span></p>
-						<p>Close: <span>{{data.ticker.ohlc.close}}</span></p>
-						<p>Volume: <span>{{data.ticker.volume}}</span></p>
-						<p>Avg Price: <span>{{data.ticker.averagePrice}}</span></p>
-						<p>Buy Quantity: <span>{{data.ticker.buyQuantity}}</span></p>
-						<p>Sell Quantity: <span>{{data.ticker.sellQuantity}}</span></p>
-						<button type="submit" class="btn buy">Buy</button>
-					</form>
+
+		<div class="trade-buy" *ngIf="data.type == 'buy'">
+			<form [formGroup]="tradeForm">
+				<div class="input-group">
+					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity" required />
 				</div>
-
-				<!-- SELL -->
-				<div class="market-trade-sell" *ngIf="data.type == 'sell'">
-          <form>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="Quantity" required />
-            </div>
-            <div class="input-group">
-              <input type="number" value="{{ data.ticker.lastPrice}}" class="form-control" placeholder="Amount" required />
-            </div>
-            
-            <p>Change: <span>{{data.ticker.change}}</span></p>
-						<p>High: <span>{{data.ticker.ohlc.high}}</span></p>
-						<p>Low: <span>{{data.ticker.ohlc.low}}</span></p>
-						<p>Open: <span>{{data.ticker.ohlc.open}}</span></p>
-						<p>Close: <span>{{data.ticker.ohlc.close}}</span></p>
-						<p>Volume: <span>{{data.ticker.volume}}</span></p>
-						<p>Avg Price: <span>{{data.ticker.averagePrice}}</span></p>
-						<p>Buy Quantity: <span>{{data.ticker.buyQuantity}}</span></p>
-						<p>Sell Quantity: <span>{{data.ticker.sellQuantity}}</span></p>
-            <button class="btn sell">Sell</button>
-          </form>
-        </div>
-
-
-			</div>
+				<div class="input-group" *ngIf="group.value == 'order'">
+					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice" required />
+				</div>
+				<div class="col-md-12 col-sm-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 ticker-val-wrap">
+							<p>Change: <span>{{data.ticker.change || 0}}</span></p>
+							<p>High: <span>{{data.ticker.ohlc.high || 0}}</span></p>
+							<p>Low: <span>{{data.ticker.ohlc.low || 0}}</span></p>
+							<p>Open: <span>{{data.ticker.ohlc.open || 0}}</span></p>
+							<p>Close: <span>{{data.ticker.ohlc.close || 0}}</span></p>
+						</div>
+						<div class="col-md-6 col-sm-12 ticker-val-wrap">
+							<p>Volume: <span>{{data.ticker.volume || 0}}</span></p>
+							<p>Avg Price: <span>{{data.ticker.averagePrice || 0}}</span></p>
+							<p>Buy Quantity: <span>{{data.ticker.buyQuantity || 0}}</span></p>
+							<p>Sell Quantity: <span>{{data.ticker.sellQuantity || 0}}</span></p>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-12 col-sm-12 submit-btn-wrap">
+					<button class="btn buy" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Buy</button>
+				</div>					
+			</form>
 		</div>
 
+		<div class="trade-buy" *ngIf="data.type == 'sell'">
+			<form [formGroup]="tradeForm">
+				<div class="input-group">
+					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity" required />
+				</div>
+				<div class="input-group" *ngIf="group.value == 'order'">
+					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice" required />
+				</div>
+				<div class="col-md-12 col-sm-12">
+					<div class="row">
+						<div class="col-md-6 col-sm-12 ticker-val-wrap">
+							<p>Change: <span>{{data.ticker.change || 0}}</span></p>
+							<p>High: <span>{{data.ticker.ohlc.high || 0}}</span></p>
+							<p>Low: <span>{{data.ticker.ohlc.low || 0}}</span></p>
+							<p>Open: <span>{{data.ticker.ohlc.open || 0}}</span></p>
+							<p>Close: <span>{{data.ticker.ohlc.close || 0}}</span></p>
+						</div>
+						<div class="col-md-6 col-sm-12 ticker-val-wrap">
+							<p>Volume: <span>{{data.ticker.volume || 0}}</span></p>
+							<p>Avg Price: <span>{{data.ticker.averagePrice || 0}}</span></p>
+							<p>Buy Quantity: <span>{{data.ticker.buyQuantity || 0}}</span></p>
+							<p>Sell Quantity: <span>{{data.ticker.sellQuantity || 0}}</span></p>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-12 col-sm-12 submit-btn-wrap">
+					<button class="btn sell" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Sell</button>
+				</div>		
+			</form>
+		</div>
 
 	</mat-dialog-content>
 </div>

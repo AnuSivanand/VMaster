@@ -1,27 +1,26 @@
 <div class="porfolio-wrapper">
-	<div class="card">
+	<div class="card" *ngIf="portfolio">
 		<div class="col-md-12 col-sm-12">
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
 					<span class="porfolio-title">Ledger Balance</span>
-					<span>474</span>
+					<span>{{portfolio.ledgerBalance}}</span>
 				</div>
 				<div class="col-md-6 col-sm-6">
 					<span class="porfolio-title">Margin Available</span>
-					<span>74</span>
+					<span>{{portfolio.marginAvailable}}</span>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 col-sm-6">
 					<span class="porfolio-title">Active P/L</span>
-					<span>0</span>
+					<span>{{portfolio.activePl}}</span>
 				</div>
 				<div class="col-md-6 col-sm-6">
 					<span class="porfolio-title">M2M</span>
-					<span>374</span>
+					<span>{{portfolio.m2m}}</span>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </div>

@@ -32,7 +32,8 @@ export class AuthenticationService {
   }
 
   logout(): Observable<any> {
-    return this.httpClient.post(this.baseUrl + "logout", {});
+    console.log(1)
+    return this.httpClient.get(this.baseUrl + "logout");
   }
 
   finishLogout() {

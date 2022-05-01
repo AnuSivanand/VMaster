@@ -25,4 +25,29 @@ export class ApiService {
   addFavouriteStocks(favList: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "save_favourites", favList);
   }
+  
+  doBuyOrSell(item: any): Observable<any> {
+    return this.httpClient.post(this.baseUrl + "buy_sell", item);
+  }
+
+  getTrades(tradeStatus: any): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "trades?type=" + tradeStatus);
+  }
+
+  getPortfolio(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "portfolio");
+  }
+
+  getFunds(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "funds");
+  }
+
+  getProfile(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "profile");
+  }
+
+  changePassword(passObj: any): Observable<any> {
+    // {"current-password":"111111","new-password":"111112"}
+    return this.httpClient.post(this.baseUrl + "change_password", passObj);
+  }
 }

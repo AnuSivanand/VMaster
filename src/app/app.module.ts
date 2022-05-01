@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatButtonToggleModule} from '@angular/material/button-toggle'
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -83,6 +84,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MatDialogModule,
+    MatButtonToggleModule,
     FormsModule,
     ReactiveFormsModule,
     PagesWrapperModule,

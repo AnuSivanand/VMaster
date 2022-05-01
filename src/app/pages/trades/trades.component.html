@@ -1,27 +1,82 @@
 <div class="trades">
 
-    <ul class="nav nav-tabs col-sm-12 col-md-12" id="myTab" role="tablist">
-      <li class="nav-item col-sm-4 col-md-4" role="presentation">
-        <button class="nav-link active" id="pending-id" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab"
-          aria-controls="pending" aria-selected="false">
-          Pending
-        </button>
-      </li>
-      <li class="nav-item col-sm-4 col-md-4" role="presentation">
-        <button class="nav-link" id="active-id" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab"
-          aria-controls="active" aria-selected="false">
-          Active
-        </button>
-      </li>
-      <li class="nav-item col-sm-4 col-md-4" role="presentation">
-        <button class="nav-link" id="closed-id" data-bs-toggle="tab" data-bs-target="#closed" type="button" role="tab"
-          aria-controls="closed" aria-selected="false">
-          Closed
-        </button>
-      </li>
-    </ul>
+  <ul class="nav nav-tabs col-sm-12 col-md-12" id="myTab" role="tablist">
+    <li class="nav-item col-sm-4 col-md-4" role="presentation">
+      <button class="nav-link active" id="pending-id" data-bs-toggle="tab" type="button" role="tab"
+        aria-controls="pending" aria-selected="false" (click)="getTrades('pending')">
+        Pending
+      </button>
+    </li>
+    <li class="nav-item col-sm-4 col-md-4" role="presentation">
+      <button class="nav-link" id="active-id" data-bs-toggle="tab" type="button" role="tab" aria-controls="active"
+        aria-selected="false" (click)="getTrades('active')">
+        Active
+      </button>
+    </li>
+    <li class="nav-item col-sm-4 col-md-4" role="presentation">
+      <button class="nav-link" id="closed-id" data-bs-toggle="tab" type="button" role="tab" aria-controls="closed"
+        aria-selected="false" (click)="getTrades('closed')">
+        Closed
+      </button>
+    </li>
+  </ul>
 
-    <div class="tab-content" id="myTabContent">
+  <div class="tab-content" id="myTabContent">
+    <div class="msg-wrap" *ngIf="!this.tradeList || !this.tradeList.length">
+      <span class="warn-title">No Pending Orders...</span>
+      <span>Place an order from Watchlist</span>
+    </div>
+    <div *ngIf="this.tradeList && this.tradeList.length">
+      <div class="close-trade-card" *ngFor="let trade of tradeList">
+        <div class="col-md-12 col-sm-12">
+          <div class="row close-trade-row">
+            <div class="col-md-6 col-sm-6">
+              <span>{{trade.trading_symbol}}</span>
+            </div>
+            <div class="col-md-6 col-sm-6 close-end-col">
+              <span class="val-wrap-green">68.2/-2.54</span>
+              <span class="val-wrap-green">QTY: {{trade.qty}}</span>
+            </div>
+          </div>
+          <div class="row close-trade-row">
+            <div class="col-md-6 col-sm-6">
+              <span>Sold By Trader</span>
+              <span class="val-wrap-red">{{trade.amount}}</span>
+            </div>
+            <div class="col-md-6 col-sm-6 close-end-col">
+              <span>Bought By Trader</span>
+              <span class="val-wrap-green">{{trade.amount}}</span>
+            </div>
+          </div>
+          <div class="row close-trade-row">
+            <div class="col-md-6 col-sm-6">
+              <span>{{trade.formatted_date}}</span>
+              <span class="val-wrap-green">{{trade.order_type}}</span>
+            </div>
+            <div class="col-md-6 col-sm-6 close-end-col">
+              <span>{{trade.formatted_date}}</span>
+              <span class="val-wrap-green">{{trade.order_type}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 
       <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-id">
         <div class="msg-wrap">
           <span class="warn-title">No Pending Orders...</span>
@@ -65,8 +120,7 @@
                 <span class="val-wrap-green">MARKET</span>
               </div>
             </div>
-          </div>
-          
+          </div>          
         </div>
         <div class="close-trade-card">
           <div class="col-md-12 col-sm-12">
@@ -205,6 +259,6 @@
           
         </div>
       </div>
-    </div>
+    </div> -->
 
-</div>
+  </div>

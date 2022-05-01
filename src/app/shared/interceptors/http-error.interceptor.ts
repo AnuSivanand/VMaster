@@ -17,7 +17,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
     private toastrService: ToastrService,
     private authService: AuthenticationService
-  ) {}
+  ) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
@@ -41,14 +41,11 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               break;
             case 401:
               this.toastrService.error(response.error.message ? response.error.message : "Unauthorised access");
-              console.log(response, 'kkk')
-              if (response.error) {                
-                this.authService.logout().subscribe((resp) => {
-                  this.authService.finishLogout();
-                });      
+              if (response.error) {
+                this.authService.finishLogout();
               }
               break;
-            default:
+            default: this.toastrService.error("Error Processing Request");
               break;
           }
         }

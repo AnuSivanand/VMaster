@@ -136,18 +136,16 @@ export class MarketPairsComponent implements OnInit {
   }
 
   openDialog(type: string, ticker: any) {
-    this.dialogConfig.disableClose = true;
-    this.dialogConfig.autoFocus = true;
     this.dialogConfig.data = {
       type: type,
-      id: 123,
-      message: 'test message goes here',
-      title: type,
-      size: "small",
       ticker: ticker
     };
-    const dialogRef = this.dialog.open(BuySellTradeComponent, this.dialogConfig);
-    dialogRef.afterClosed().subscribe((data) => { });
+    this.dialog.open(BuySellTradeComponent, this.dialogConfig);
+
+    // this.dialogConfig.disableClose = true;
+    // this.dialogConfig.autoFocus = true;
+    // const dialogRef = this.dialog.open(BuySellTradeComponent, this.dialogConfig);
+    // dialogRef.afterClosed().subscribe((data) => { });
   }
 
   onDeleteStockItem(ticker: any) {

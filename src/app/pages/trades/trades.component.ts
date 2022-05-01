@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
   selector: 'app-trades',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TradesComponent implements OnInit {
 
-  constructor() { }
+  private tradeStatus: string = 'pending';
+  public tradeList!: any[];
+
+  constructor(
+    private apiService: ApiService,
+    private toastrService: ToastrService
+  ) {
+    this.getTrades(this.tradeStatus);
+  }
 
   ngOnInit(): void {
+  }
+
+  getTrades(tradeStatus: string) {
+    this.apiService.getTrades(tradeStatus).subscribe((resp) => {
+      if (resp && resp.status) {
+        this.tradeList = resp.orders;
+      }
+    });
   }
 
 }
