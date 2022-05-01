@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
     private darkModeService: DarkModeService,
     private authService: AuthenticationService
   ) { }
-  
+
   ngOnInit(): void {
     this.userDetails = JSON.parse(sessionStorage.getItem("current_user") || "");
     if (!this.userDetails) {
@@ -30,6 +30,6 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     this.authService.logout().subscribe((resp) => {
       this.authService.finishLogout();
-    }); 
+    });
   }
 }

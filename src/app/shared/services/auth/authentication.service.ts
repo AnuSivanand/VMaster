@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { Constants } from '../../common/constant';
 
 @Injectable({
@@ -10,6 +10,9 @@ import { Constants } from '../../common/constant';
 export class AuthenticationService {
 
   private baseUrl = Constants.BASE_URL;
+  private logged = new ReplaySubject<boolean>(1);
+  isLogged = this.logged.asObservable();
+  private user: any;
 
   constructor(
     private httpClient: HttpClient,
@@ -23,8 +26,11 @@ export class AuthenticationService {
   loginSuccess(loginResp: any) {
     localStorage.setItem("access_token", loginResp.token);
     sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
+
+    this.user = loginResp.user;
+    this.logged.next(this.user);
   }
-  
+
   logout(): Observable<any> {
     return this.httpClient.post(this.baseUrl + "logout", {});
   }

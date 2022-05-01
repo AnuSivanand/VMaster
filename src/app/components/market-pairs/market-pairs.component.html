@@ -11,26 +11,27 @@
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="mcx-id" data-bs-toggle="tab" data-bs-target="#mcx" type="button" role="tab"
+      <button class="nav-link active" 
+      id="mcx-id" data-bs-toggle="tab" type="button" role="tab"
         aria-controls="mcx" aria-selected="false" (click)="onNavSelect('NFO')">
         NSE Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="kcs-id" data-bs-toggle="tab" data-bs-target="#nse" type="button" role="tab"
+      <button class="nav-link" id="kcs-id" data-bs-toggle="tab" type="button" role="tab"
         aria-controls="kcs" aria-selected="false" (click)="onNavSelect('MCX')">
         MCX Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="usdt-id" data-bs-toggle="tab" data-bs-target="#other" type="button" role="tab"
+      <button class="nav-link" id="usdt-id" data-bs-toggle="tab" type="button" role="tab"
         aria-controls="usdt" aria-selected="false" (click)="onNavSelect('OTH')">
         Other
       </button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="mcx" role="tabpanel" aria-labelledby="mcx-id">
+    <div class="tab-pane fade show active" role="tabpanel">
       <table class="table star-active">
         <thead>
           <tr>
@@ -47,7 +48,12 @@
             <th>Delete</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
+          <tr>
+            <td colspan="11"  class="no-data">No data available.</td>
+          </tr>          
+        </tbody>
+        <tbody *ngIf="favouriteFutureStocks && favouriteFutureStocks.length">
           <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
             <td width="13%">{{tickerVal.stockName}} </td>
             <td width="9%"> {{tickerVal.lastPrice}} </td>
@@ -78,62 +84,6 @@
             <td class="green">+5.6%</td>            
             <td class="red">-2.58%</td>
           </tr> -->
-        </tbody>
-      </table>
-    </div>
-    <div class="tab-pane fade" id="nse" role="tabpanel" aria-labelledby="kcs-id">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Script</th>
-            <th>LTP</th>
-            <th>Change</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Open</th>
-            <th>Close</th>
-            <th>Volume</th>
-            <th>Sell</th>
-            <th>Buy</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>BTC/ETH</td>
-            <td>0.00020255</td>
-            <td class="green">+1.58%</td>
-            <td>BTC/ETH</td>
-            <td>0.00020255</td>
-            <td class="green">+1.58%</td>
-            <td>BTC/ETH</td>
-            <td>0.00020255</td>
-            <td width="10%">
-              <button class="btn buy">Buy</button>
-            </td>
-            <td width="10%"><button class="btn sell">Sell</button></td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-    <div class="tab-pane fade" id="other" role="tabpanel" aria-labelledby="usdt-id">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Script</th>
-            <th>LTP</th>
-            <th>Change</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Open</th>
-            <th>Close</th>
-            <th>Volume</th>
-            <th>Sell</th>
-            <th>Buy</th>
-          </tr>
-        </thead>
-        <tbody>
-
         </tbody>
       </table>
     </div>

@@ -130,6 +130,9 @@ export class MarketPairsComponent implements OnInit {
 
   onNavSelect(exchgType: String) {
     this.exchangeType = exchgType;
+    setTimeout(() => {
+      this.ngOnInit();
+    }, 500);
   }
 
   openDialog(type: string, ticker: any) {
