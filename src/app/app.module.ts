@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatButtonToggleModule} from '@angular/material/button-toggle'
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,7 @@ import { WatchlistFilterPipe } from './pages/exchange/filters/watchlist-filter.p
 import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
+import { LoaderInterceptor } from './shared/interceptors/loader/loader.interceptor';
 
 // import { TradingDarkChartComponent } from './components/trading-dark-chart/trading-dark-chart.component';
 // import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
@@ -46,7 +47,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
 @NgModule({
   declarations: [
     AppComponent,
-    MarketPairsComponent,   
+    MarketPairsComponent,
     ExchangeComponent,
     LoginComponent,
     NotFoundComponent,
@@ -56,7 +57,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     BuySellTradeComponent,
     TradesComponent,
     PortfolioComponent,
-    WatchlistFilterPipe,
+    WatchlistFilterPipe
 
     // SignUpComponent,
     // TermsAndConditionsComponent,
@@ -88,9 +89,14 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
     FormsModule,
     ReactiveFormsModule,
     PagesWrapperModule,
-    IvyCarouselModule,
+    IvyCarouselModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

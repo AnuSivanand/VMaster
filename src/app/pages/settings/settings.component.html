@@ -12,6 +12,9 @@
             </div>
             <div class="col-md-12 info-wrap"> <label for="newPass">New password</label>
               <input type="text" class="form-control" placeholder="Enter new password" formControlName="newPassword" />
+              <div class="validation-warn-msg" *ngIf="formValues.newPassword.errors?.['minlength']">
+                Password should have minimum 6 characters
+              </div>
             </div>
             <div class="col-md-12 info-wrap"> <label for="newPass">Confirm New password</label>
               <input type="text" class="form-control" placeholder="Enter new password"

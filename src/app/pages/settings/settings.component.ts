@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.changePassForm = this.fb.group({
       currentPassword: new FormControl('', [Validators.required]),
-      newPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmNewPassword: new FormControl('', [Validators.required])
     }, {
       validator: CustomValidators.mustMatch('newPassword', 'confirmNewPassword')
