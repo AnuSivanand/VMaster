@@ -1,10 +1,12 @@
 <div class="wallet">
-  <div class="col-md-4 col-sm-12 wallet-wrap">
+  <div class="col-md-4 col-sm-12 wallet-wrap" *ngFor="let fund of fundDetails">
+    <div class="col-md-6 col-sm-6"> <span>{{fund.created_at}}</span> </div>
     <div class="col-md-6 col-sm-6">
-      <span>2022-02-28 07:10:15</span>
+      <span class="val-wrap-gray" [ngClass]="{'credit': fund.status == 1, 'dedit': fund.status == 2}">
+        <span *ngIf="fund.status == 1">+</span>
+        <span *ngIf="fund.status == 2">-</span>
+        {{fund.amount}}
+      </span>
     </div>
-    <div class="col-md-6 col-sm-6">
-      <span class="val-wrap-gray">+330565</span>
-    </div>    
   </div>
 </div>

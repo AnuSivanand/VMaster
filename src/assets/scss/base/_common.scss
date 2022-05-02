@@ -236,3 +236,7 @@ tbody tr:hover {
     transform: rotate(360deg);
   }
 }
+
+input.form-control.ng-touched.ng-dirty.ng-invalid {
+  border: 2px solid #dc3545;
+}

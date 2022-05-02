@@ -47,7 +47,6 @@ export class ApiService {
   }
 
   changePassword(passObj: any): Observable<any> {
-    // {"current-password":"111111","new-password":"111112"}
     return this.httpClient.post(this.baseUrl + "change_password", passObj);
   }
 }

@@ -4,21 +4,26 @@
       <div class="card-body">
         <h5 class="card-title">Security Information</h5>
         <div class="settings-profile">
-          <form>
-            <div class="row">
-              <div class="col-md-6">
-                <label for="currentPass">
-                  Current password
-                </label>
-                <input id="currentPass" type="text" class="form-control" placeholder="Enter your password" />
+          <form [formGroup]="changePassForm">
+            <div class="col-md-12 info-wrap">
+              <label> Current password </label>
+              <input type="text" class="form-control" placeholder="Enter your password"
+                formControlName="currentPassword" />
+            </div>
+            <div class="col-md-12 info-wrap"> <label for="newPass">New password</label>
+              <input type="text" class="form-control" placeholder="Enter new password" formControlName="newPassword" />
+            </div>
+            <div class="col-md-12 info-wrap"> <label for="newPass">Confirm New password</label>
+              <input type="text" class="form-control" placeholder="Enter new password"
+                formControlName="confirmNewPassword" />
+              <div class="validation-warn-msg" *ngIf="formValues.confirmNewPassword?.errors?.mustMatch">
+                Password and confirm not match
               </div>
-              <div class="col-md-6">
-                <label for="newPass">New password</label>
-                <input id="newPass" type="text" class="form-control" placeholder="Enter new password" />
-              </div>
-              <div class="col-md-12">
-                <input type="submit" value="Update" />
-              </div>
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-primary" [disabled]="!(changePassForm.valid && changePassForm.dirty)"
+                (click)="onUpdatePassword()">Update
+              </button>
             </div>
           </form>
         </div>

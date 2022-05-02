@@ -1,7 +1,54 @@
 <div class="settings mtb15">
   <div class="container-fluid">
-    <div class="card">
-      <div class="card-body">
+
+    <div class="trading-wrap" *ngIf="nseTrading">
+      <h5 class="card-title">NSE: Trading Enabled</h5>
+      <div class="card">
+        <div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Brokerage</label>
+            <span>{{nseTrading.brokerage}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Margin Intraday</label>
+            <span>{{nseTrading.margin_intraday}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Margin Holding</label>
+            <span>{{nseTrading.margin_holding}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trading-wrap" *ngIf="mcxTrading">
+      <h5 class="card-title">MCX: Trading Enabled</h5>
+      <div class="card">
+        <div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Exposure Type</label>
+            <span>{{mcxTrading.exposure_type}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Brokerage</label>
+            <span>{{mcxTrading.brokerage}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Margin Intraday</label>
+            <span>{{mcxTrading.margin_intraday}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Margin Holding</label>
+            <span>{{mcxTrading.margin_holding}}</span>
+          </div>
+          <div class="trading-item">
+            <label for="" class="settings-label">Brokerage Type</label>
+            <span>{{mcxTrading.brokerage_type}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="card-body">
         <h5 class="card-title">General Information</h5>
         <div class="settings-profile">
           <form>
@@ -52,7 +99,7 @@
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div> -->
+
   </div>
 </div>

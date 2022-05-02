@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
   selector: 'app-wallet',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WalletComponent implements OnInit {
 
-  constructor() { }
+  public fundDetails: any;
+
+  constructor(
+    private apiService: ApiService,
+    private toastrService: ToastrService
+  ) {
+    this.getFundsDetails();
+  }
 
   ngOnInit(): void {
+  }
+
+  getFundsDetails() {
+    this.apiService.getFunds().subscribe((resp) => {
+      if (resp && resp.status) {
+        this.fundDetails = resp.funds;
+      }
+    });
   }
 
 }
