@@ -25,6 +25,7 @@ export class AuthenticationService {
 
   loginSuccess(loginResp: any) {
     localStorage.setItem("access_token", loginResp.token);
+    localStorage.setItem("ticker_access_token", loginResp.tickerToken)
     sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
 
     this.user = loginResp.user;
@@ -32,12 +33,12 @@ export class AuthenticationService {
   }
 
   logout(): Observable<any> {
-    console.log(1)
     return this.httpClient.get(this.baseUrl + "logout");
   }
 
   finishLogout() {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("ticker_access_token");
     sessionStorage.removeItem("current_user");
     this.router.navigateByUrl("/login");
   }

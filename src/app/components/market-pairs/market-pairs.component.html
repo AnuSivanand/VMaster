@@ -1,30 +1,27 @@
 <div class="market-pairs">
   <div class="input-group">
-    <ng-multiselect-dropdown 
-      class="watchlist-search" [placeholder]="'Search and Add'" 
-      [settings]="dropdownSettings" [data]="futureStockList" 
-      [(ngModel)]="selectedStocks" (onDeSelect)="onItemDeSelect($event)" 
+    <ng-multiselect-dropdown class="watchlist-search" [placeholder]="'Search and Add'" [settings]="dropdownSettings"
+      [data]="futureStockList" [(ngModel)]="selectedStocks" (onDeSelect)="onItemDeSelect($event)"
       (onDropDownClose)="onDropDownClose()">
     </ng-multiselect-dropdown>
 
   </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" 
-      id="mcx-id" data-bs-toggle="tab" type="button" role="tab"
-        aria-controls="mcx" aria-selected="false" (click)="onNavSelect('NFO')">
+      <button class="nav-link active" id="mcx-id" data-bs-toggle="tab" type="button" role="tab" aria-controls="mcx"
+        aria-selected="false" (click)="onNavSelect('NFO')">
         NSE Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="kcs-id" data-bs-toggle="tab" type="button" role="tab"
-        aria-controls="kcs" aria-selected="false" (click)="onNavSelect('MCX')">
+      <button class="nav-link" id="kcs-id" data-bs-toggle="tab" type="button" role="tab" aria-controls="kcs"
+        aria-selected="false" (click)="onNavSelect('MCX')">
         MCX Futures
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="usdt-id" data-bs-toggle="tab" type="button" role="tab"
-        aria-controls="usdt" aria-selected="false" (click)="onNavSelect('OTH')">
+      <button class="nav-link" id="usdt-id" data-bs-toggle="tab" type="button" role="tab" aria-controls="usdt"
+        aria-selected="false" (click)="onNavSelect('OTH')">
         Other
       </button>
     </li>
@@ -42,15 +39,15 @@
             <th>Open</th>
             <th>Close</th>
             <th>Volume</th>
-            <th>Sell</th>
             <th>Buy</th>
+            <th>Sell</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
           <tr>
-            <td colspan="11"  class="no-data">No data available.</td>
-          </tr>          
+            <td colspan="11" class="no-data">No data available.</td>
+          </tr>
         </tbody>
         <tbody *ngIf="favouriteFutureStocks && favouriteFutureStocks.length">
           <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
@@ -64,16 +61,18 @@
             <td width="9%"> {{tickerVal.ohlc?.close || 0}}</td>
             <td width="9%"> {{tickerVal.volume}}</td>
             <td width="9%">
-              <button class="btn buy" 
-                (click)="openDialog('buy', tickerVal)">Buy</button>
+              <div class="buy-icon" (click)="openDialog('buy', tickerVal)">
+                <span class="material-symbols-outlined"> download </span>
+              </div>
             </td>
             <td width="9%">
-              <button class="btn sell" 
-                (click)="openDialog('sell', tickerVal)">Sell</button>
+              <div class="sell-icon" (click)="openDialog('sell', tickerVal)">
+                <span class="material-symbols-outlined"> file_upload </span>
+              </div>
             </td>
             <td width="3%">
-              <div (click)="onDeleteStockItem(tickerVal)">
-                <i class="icon ion-ios-trash"></i>
+              <div class="delete-icon" (click)="onDeleteStockItem(tickerVal)">
+                <span class="material-symbols-outlined"> delete_forever </span>
               </div>
             </td>
           </tr>
@@ -88,41 +87,3 @@
     </div>
   </div>
 </div>
-
-<!-- Modal 
-<div class="modal fade" id="buyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Buy stock Name</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal popup" tabindex="-1" role="dialog">
-	<h1>helloo</h1>
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>-->

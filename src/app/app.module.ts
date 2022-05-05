@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,6 +26,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { LoaderInterceptor } from './shared/interceptors/loader/loader.interceptor';
+import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/stock-delete-confirm.component';
 
 // import { TradingDarkChartComponent } from './components/trading-dark-chart/trading-dark-chart.component';
 // import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
@@ -57,7 +59,8 @@ import { LoaderInterceptor } from './shared/interceptors/loader/loader.intercept
     BuySellTradeComponent,
     TradesComponent,
     PortfolioComponent,
-    WatchlistFilterPipe
+    WatchlistFilterPipe,
+    StockDeleteConfirmComponent
 
     // SignUpComponent,
     // TermsAndConditionsComponent,
@@ -84,6 +87,7 @@ import { LoaderInterceptor } from './shared/interceptors/loader/loader.intercept
     NgMultiSelectDropDownModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    MatIconModule,
     MatDialogModule,
     MatButtonToggleModule,
     FormsModule,

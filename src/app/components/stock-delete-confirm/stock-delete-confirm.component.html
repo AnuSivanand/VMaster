@@ -1,0 +1,15 @@
+<div class="popup">
+	<div align="end">
+		<a (click)="close()">
+			<i class="icon ion-md-close dialog-close"></i>
+		</a>
+	</div>
+	<div class="popup-title">Confirm delete</div>
+	<mat-dialog-content>
+		<p class="confirm-text">Do you want to remove <b>{{data.ticker.stockName}}</b> from your watchlist?</p>
+	</mat-dialog-content>
+	<div align="end">
+		<button class="btn cancel" (click)="cancelClick()">Cancel</button>
+		<button class="btn delete" (click)="deleteClick()">Delete</button>
+	</div>
+</div>

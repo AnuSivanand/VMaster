@@ -35,7 +35,7 @@ export class BuySellTradeComponent implements OnInit {
 
   }
 
-  confirmClick() {
+  close() {
     this.dialogRef.close(true);
   }
 

@@ -30,6 +30,10 @@ export class ApiService {
     return this.httpClient.post(this.baseUrl + "buy_sell", item);
   }
 
+  deleteStock(instrumentToken: any, type: string) {
+    return this.httpClient.delete(this.baseUrl + "remove_favourites?instrument_token=" + instrumentToken + "&type=" + type);
+  }
+
   getTrades(tradeStatus: any): Observable<any> {
     return this.httpClient.get(this.baseUrl + "trades?type=" + tradeStatus);
   }

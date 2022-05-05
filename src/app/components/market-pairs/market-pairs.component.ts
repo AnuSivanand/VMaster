@@ -6,6 +6,7 @@ import { TickFull } from 'kiteconnect-ts/dist/types/ticker';
 import { Constants } from '../../shared/common/constant';
 import { BuySellTradeComponent } from '../buy-sell-trade/buy-sell-trade.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { StockDeleteConfirmComponent } from '../stock-delete-confirm/stock-delete-confirm.component';
 
 
 @Component({
@@ -25,8 +26,8 @@ export class MarketPairsComponent implements OnInit {
   public loading: boolean = false;
   public exchangeType: String = 'NFO';
 
-  constructor(
-    private dialog: MatDialog,
+  constructor(    
+    private matDialogRef: MatDialog,
     private apiService: ApiService
   ) {
     this.dialogConfig = new MatDialogConfig();
@@ -51,7 +52,6 @@ export class MarketPairsComponent implements OnInit {
   }
 
   onGetWatchlistSuccess(resp: any) {
-    console.log(resp);
     if (resp && resp.status) {
       this.futureStockList = resp.instruments;
       this.loading = false;
@@ -66,7 +66,6 @@ export class MarketPairsComponent implements OnInit {
   }
 
   onGetFavouriteFutureListSuccess(resp: any) {
-    console.log(resp);
     if (resp && resp.status) {
       this.favouriteFutureStocks = resp.favourites;
       this.loading = false;
@@ -85,7 +84,7 @@ export class MarketPairsComponent implements OnInit {
     this.loading = true;
     let ticker = new KiteTicker({
       apiKey: Constants.API_KEY,
-      accessToken: Constants.ACCESS_TOKEN
+      accessToken: localStorage.getItem('ticker_access_token') || ""
     });
     ticker.on('ticks', (ticks: TickFull) => {
       this.tickerValues = ticks;
@@ -140,16 +139,19 @@ export class MarketPairsComponent implements OnInit {
       type: type,
       ticker: ticker
     };
-    this.dialog.open(BuySellTradeComponent, this.dialogConfig);
-
-    // this.dialogConfig.disableClose = true;
-    // this.dialogConfig.autoFocus = true;
-    // const dialogRef = this.dialog.open(BuySellTradeComponent, this.dialogConfig);
-    // dialogRef.afterClosed().subscribe((data) => { });
+    this.matDialogRef.open(BuySellTradeComponent, this.dialogConfig);
   }
 
   onDeleteStockItem(ticker: any) {
-    console.log(ticker)
+    const dialogRef = this.matDialogRef.open(StockDeleteConfirmComponent, {
+      disableClose: true,
+      data: {'ticker': ticker, 'type': this.exchangeType} 
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.deleteStatus) {
+        this.ngOnInit();
+      }
+    });
   }
 
   onDropDownClose() {
