@@ -95,7 +95,9 @@ export class MarketPairsComponent implements OnInit {
         if (currentItem) {
           return {
             id: item.instrument_token,
+            instrument_token: item.instrument_token,
             stockName: item.trading_symbol,
+            trading_symbol: item.trading_symbol,
             averagePrice: (currentItem && currentItem.averagePrice) ? currentItem.averagePrice : 0,
             buyQuantity: (currentItem && currentItem.buyQuantity) ? currentItem.buyQuantity : 0,
             depth: (currentItem && currentItem.depth) ? currentItem.depth : {},

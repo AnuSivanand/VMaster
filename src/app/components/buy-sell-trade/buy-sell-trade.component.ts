@@ -91,6 +91,8 @@ export class BuySellTradeComponent implements OnInit {
     this.apiService.doBuyOrSell(item).subscribe((resp) => {
       if (resp.status) {
         this.toastrService.success(resp.message);
+      } else {
+        this.toastrService.error(resp.message);
       }
     }); 
   }

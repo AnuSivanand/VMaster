@@ -34,28 +34,30 @@
               <span>{{trade.trading_symbol}}</span>
             </div>
             <div class="col-md-6 col-sm-6 close-end-col">
-              <span class="val-wrap-green">68.2/-2.54</span>
+              <span class="val-wrap-green" *ngIf="trade.action == 'Buy'">{{trade.action}}</span>
+              <span class="val-wrap-red" *ngIf="trade.action == 'Sell'">{{trade.action}}</span>
               <span class="val-wrap-green">QTY: {{trade.qty}}</span>
             </div>
           </div>
           <div class="row close-trade-row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6" *ngIf="trade.action == 'Sell'">
               <span>Sold By Trader</span>
               <span class="val-wrap-red">{{trade.amount}}</span>
             </div>
-            <div class="col-md-6 col-sm-6 close-end-col">
+            <div class="col-md-6 col-sm-6" *ngIf="trade.action == 'Buy'">
               <span>Bought By Trader</span>
               <span class="val-wrap-green">{{trade.amount}}</span>
             </div>
-          </div>
-          <div class="row close-trade-row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6  close-end-col">
               <span>{{trade.formatted_date}}</span>
               <span class="val-wrap-green">{{trade.order_type}}</span>
             </div>
-            <div class="col-md-6 col-sm-6 close-end-col">
-              <span>{{trade.formatted_date}}</span>
-              <span class="val-wrap-green">{{trade.order_type}}</span>
+          </div>
+          <div class="row close-trade-row" *ngIf="trade.status == 2 || trade.status == 3">
+            <div class="col-md-6 col-sm-6">
+            <span>Status : </span>
+            <span class="val-wrap-green" *ngIf="trade.status == 2">Executed</span>
+            <span class="val-wrap-red" *ngIf="trade.status == 3">Cancelled</span>
             </div>
           </div>
         </div>

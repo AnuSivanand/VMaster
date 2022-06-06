@@ -32,16 +32,16 @@
         <thead>
           <tr>
             <th>Script</th>
-            <th>LTP</th>
-            <th>Change</th>
-            <th>High</th>
-            <th>Low</th>
-            <th>Open</th>
-            <th>Close</th>
-            <th>Volume</th>
-            <th>Buy</th>
-            <th>Sell</th>
-            <th>Delete</th>
+            <th style="text-align:right;">LTP</th>
+            <th style="text-align:right;">Change</th>
+            <th style="text-align:right;">High</th>
+            <th style="text-align:right;">Low</th>
+            <th style="text-align:right;">Open</th>
+            <th style="text-align:right;">Close</th>
+            <th style="text-align:right;">Volume</th>
+            <th style="text-align:right;">Buy</th>
+            <th style="text-align:right;">Sell</th>
+            <th style="text-align:right;">Delete</th>
           </tr>
         </thead>
         <tbody *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
@@ -51,26 +51,26 @@
         </tbody>
         <tbody *ngIf="favouriteFutureStocks && favouriteFutureStocks.length">
           <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
-            <td width="13%">{{tickerVal.stockName}} </td>
-            <td width="9%"> {{tickerVal.lastPrice}} </td>
-            <td width="9%"> {{tickerVal.change}}%</td>
+            <td width="13%" style="text-align:left;">{{tickerVal.stockName}} </td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.lastPrice}} </td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.change}}%</td>
             <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> -->
-            <td width="9%"> {{tickerVal.ohlc?.high || 0}}</td>
-            <td width="9%"> {{tickerVal.ohlc?.low || 0}}</td>
-            <td width="9%"> {{tickerVal.ohlc?.open || 0}}</td>
-            <td width="9%"> {{tickerVal.ohlc?.close || 0}}</td>
-            <td width="9%"> {{tickerVal.volume}}</td>
-            <td width="9%">
+            <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.high || 0}}</td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.low || 0}}</td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.open || 0}}</td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.close || 0}}</td>
+            <td width="9%" style="text-align:right;"> {{tickerVal.volume}}</td>
+            <td width="5%" style="text-align:right;">
               <div class="buy-icon" (click)="openDialog('buy', tickerVal)">
-                <span class="material-symbols-outlined"> download </span>
+                Buy
               </div>
             </td>
-            <td width="9%">
+            <td width="5%" style="text-align:right;">
               <div class="sell-icon" (click)="openDialog('sell', tickerVal)">
-                <span class="material-symbols-outlined"> file_upload </span>
+                Sell
               </div>
             </td>
-            <td width="3%">
+            <td width="5%" style="text-align:right;">
               <div class="delete-icon" (click)="onDeleteStockItem(tickerVal)">
                 <span class="material-symbols-outlined"> delete_forever </span>
               </div>
