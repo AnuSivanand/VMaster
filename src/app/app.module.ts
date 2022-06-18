@@ -27,24 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { LoaderInterceptor } from './shared/interceptors/loader/loader.interceptor';
 import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/stock-delete-confirm.component';
-
-// import { TradingDarkChartComponent } from './components/trading-dark-chart/trading-dark-chart.component';
-// import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
-// import { SignUpComponent } from './pages/sign-up/sign-up.component';
-// import { HistoryOrderComponent } from './components/history-order/history-order.component';
-// import { MarketCarouselComponent } from './components/market-carousel/market-carousel.component';
-// import { MarketHistoryComponent } from './components/market-history/market-history.component';
-// import { MarketNewsComponent } from './components/market-news/market-news.component';
-// import { MarketsComponent } from './pages/markets/markets.component';
-// import { MarketsListComponent } from './components/markets-list/markets-list.component';
-// import { MarketTradeComponent } from './components/market-trade/market-trade.component';
-// import { OrderBookComponent } from './components/order-book/order-book.component';
-// import { TradingChartComponent } from './components/trading-chart/trading-chart.component';
-// import { LockComponent } from './pages/lock/lock.component';
-// import { NewsDetailsComponent } from './pages/news-details/news-details.component';
-// import { OtpNumberComponent } from './pages/otp-number/otp-number.component';
-// import { OtpVerifyComponent } from './pages/otp-verify/otp-verify.component';
-// import { ResetComponent } from './pages/reset/reset.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -61,24 +44,6 @@ import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/s
     PortfolioComponent,
     WatchlistFilterPipe,
     StockDeleteConfirmComponent
-
-    // SignUpComponent,
-    // TermsAndConditionsComponent,
-    // TradingDarkChartComponent,
-    // HistoryOrderComponent,
-    // MarketCarouselComponent,
-    // MarketHistoryComponent,
-    // MarketNewsComponent,
-    // MarketsComponent,
-    // MarketsListComponent,
-    // MarketTradeComponent,
-    // OrderBookComponent,
-    // TradingChartComponent,
-    // LockComponent,
-    // NewsDetailsComponent,
-    // OtpNumberComponent,
-    // OtpVerifyComponent,
-    // ResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +61,7 @@ import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/s
     IvyCarouselModule
   ],
   providers: [
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

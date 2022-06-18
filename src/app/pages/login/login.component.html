@@ -20,16 +20,20 @@
       </div>
       <!-- <div class="text-end">
         <a routerLink="/reset">Forgot Password?</a>
-      </div>
-      <div class="custom-control form-check">
-        <input type="checkbox" class="form-check-input" id="form-checkbox" />
-        <label class="form-check-label" for="form-checkbox">
-          Remember me
-        </label>
       </div> -->
+      <div class="custom-control form-check">
+        <input 
+          type="checkbox" 
+          class="form-check-input" 
+          id="form-checkbox"
+          formControlName="rememberMe" />
+          <label class="form-check-label" for="form-checkbox">
+            Remember me
+          </label>
+      </div> 
       <div class="error-msg">{{errorMessage}}</div>
       <button class="btn btn-primary" 
-        [disabled]="!(loginForm.valid && loginForm.dirty)" 
+        [disabled]="!(loginForm.valid )" 
         (click)="onSignInClick()">Sign In
       </button>
     </form>
