@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
+import { EncryptDecryptService } from 'src/app/shared/services/encrypt-decrypt/encrypt-decrypt.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private loginFormBuilder: FormBuilder,
     private authService: AuthenticationService,
     private toastrService: ToastrService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private encryptDecryptService: EncryptDecryptService
   ) {
     this.loginForm = this.loginFormBuilder.group({
       email: new FormControl('', [Validators.required]),
@@ -30,9 +32,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { 
-    this.userDetails = JSON.parse(this.cookieService.get('user_details') || '{}');
-    if (this.userDetails.rememberMe) {
+  ngOnInit(): void {
+    let loggedUserDetails = this.cookieService.get('user_details') || '{}';
+    let decryptUserDetails = this.encryptDecryptService.get('userDetails', loggedUserDetails);
+    this.userDetails = JSON.parse(decryptUserDetails);    
+    if (this.userDetails && this.userDetails.rememberMe) {
       this.loginForm.patchValue({
         email: this.userDetails.userMail,
         password: this.userDetails.password,
@@ -51,16 +55,15 @@ export class LoginComponent implements OnInit {
         password: loginCredentials.password,
         rememberMe: loginCredentials.rememberMe
       };
-      this.cookieService.set('user_details', JSON.stringify(loggedUser));
+      let encryptUserDetails = this.encryptDecryptService.set('userDetails', JSON.stringify(loggedUser));
+      this.cookieService.set('user_details', encryptUserDetails, 20);
     } else {
-      // if (this.userDetails) {        
-        this.cookieService.delete('user_details');
-      // }
+      this.cookieService.delete('user_details');
     }
     if (loginCredentials.email && loginCredentials.password) {
       this.authService.login(loginCredentials)
         .subscribe(this.onLoginSuccess.bind(this));
-    } 
+    }
   }
 
   onLoginSuccess(resp: any) {

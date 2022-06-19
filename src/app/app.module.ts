@@ -28,6 +28,7 @@ import { HttpErrorInterceptor } from './shared/interceptors/http-error.intercept
 import { LoaderInterceptor } from './shared/interceptors/loader/loader.interceptor';
 import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/stock-delete-confirm.component';
 import { CookieService } from 'ngx-cookie-service';
+import { EncryptDecryptService } from './shared/services/encrypt-decrypt/encrypt-decrypt.service';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CookieService } from 'ngx-cookie-service';
     IvyCarouselModule
   ],
   providers: [
+    EncryptDecryptService,
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
