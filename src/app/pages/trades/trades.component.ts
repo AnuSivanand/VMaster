@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/shared/services/api/api.service';
 })
 export class TradesComponent implements OnInit {
 
-  private tradeStatus: string = 'pending';
+  public tradeStatus: string = 'pending';
   public tradeList!: any[];
 
   constructor(
@@ -23,6 +23,7 @@ export class TradesComponent implements OnInit {
   }
 
   getTrades(tradeStatus: string) {
+    this.tradeStatus = tradeStatus;
     this.apiService.getTrades(tradeStatus).subscribe((resp) => {
       if (resp && resp.status) {
         this.tradeList = resp.orders;

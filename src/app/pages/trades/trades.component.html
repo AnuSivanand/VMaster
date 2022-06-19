@@ -23,8 +23,10 @@
 
   <div class="tab-content" id="myTabContent">
     <div class="msg-wrap" *ngIf="!this.tradeList || !this.tradeList.length">
-      <span class="warn-title">No Pending Orders...</span>
-      <span>Place an order from Watchlist</span>
+      <span class="warn-title" *ngIf="this.tradeStatus == 'pending'" >No Pending Orders...</span>
+      <span *ngIf="this.tradeStatus == 'pending'">Place an order from Watchlist</span>
+      <span class="warn-title" *ngIf="this.tradeStatus == 'active'" >No Active Orders...</span>
+      <span class="warn-title" *ngIf="this.tradeStatus == 'closed'" >No Closed Orders...</span>
     </div>
     <div *ngIf="this.tradeList && this.tradeList.length">
       <div class="close-trade-card" *ngFor="let trade of tradeList">
@@ -51,6 +53,12 @@
             <div class="col-md-6 col-sm-6  close-end-col">
               <span>{{trade.formatted_date}}</span>
               <span class="val-wrap-green">{{trade.order_type}}</span>
+            </div>
+            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 1">
+              <span class="val-wrap-red">Cancel</span>
+            </div>
+            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 0">
+              <span class="val-wrap-red">Close</span>
             </div>
           </div>
           <div class="row close-trade-row" *ngIf="trade.status == 2 || trade.status == 3">

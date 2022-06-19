@@ -56,15 +56,15 @@ export class BuySellTradeComponent implements OnInit {
   createTradeMarketForm() {
     this.clearTradeForm();
     this.tradeForm = this.fb.group({
-      quantity: new FormControl('', [Validators.required])
+      quantity: new FormControl(1, [Validators.required])
     });
   }
 
   createTradeOrderForm() {
     this.clearTradeForm();
     this.tradeForm = this.fb.group({
-      quantity: new FormControl('', [Validators.required]),
-      lastPrice: new FormControl(0, [Validators.required])
+      quantity: new FormControl(1, [Validators.required]),
+      lastPrice: new FormControl('', [Validators.required])
       // this.data.ticker.lastPrice
     });
   }
@@ -94,6 +94,10 @@ export class BuySellTradeComponent implements OnInit {
       } else {
         this.toastrService.error(resp.message);
       }
+      let audio = new Audio();
+      audio.src = "assets/Notification.mp3";
+      audio.load();
+      audio.play();
     }); 
   }
 
