@@ -26,8 +26,7 @@ export class AuthenticationService {
   loginSuccess(loginResp: any) {
     localStorage.setItem("access_token", loginResp.token);
     localStorage.setItem("ticker_access_token", loginResp.tickerToken)
-    sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
-
+    localStorage.setItem("current_user", loginResp.user?.email);
     this.user = loginResp.user;
     this.logged.next(this.user);
   }
@@ -39,7 +38,7 @@ export class AuthenticationService {
   finishLogout() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("ticker_access_token");
-    sessionStorage.removeItem("current_user");
+    localStorage.removeItem("current_user");
     this.router.navigateByUrl("/login");
   }
 

@@ -33,33 +33,36 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let loggedUserDetails = this.cookieService.get('user_details') || '{}';
-    let decryptUserDetails = this.encryptDecryptService.get('userDetails', loggedUserDetails);
-    this.userDetails = JSON.parse(decryptUserDetails);    
-    if (this.userDetails && this.userDetails.rememberMe) {
-      this.loginForm.patchValue({
-        email: this.userDetails.userMail,
-        password: this.userDetails.password,
-        rememberMe: this.userDetails.rememberMe
-      });
+    if (this.checkUserIsLoggedIn()) {
+      this.router.navigate(["/watchlist"]);
+    } else {
+      let loggedUserDetails = this.cookieService.get('user_details') || '{}';
+      let decryptUserDetails = this.encryptDecryptService.get('user_details', loggedUserDetails);
+      this.userDetails = JSON.parse(decryptUserDetails);
+      if (this.userDetails && this.userDetails.rememberMe) {
+        this.loginForm.patchValue({
+          email: this.userDetails.email,
+          password: this.userDetails.password,
+          rememberMe: this.userDetails.rememberMe
+        });
+      }
+    }
+  }
+
+  checkUserIsLoggedIn() {
+    let token = localStorage.getItem("access_token");
+    let tickerToken = localStorage.getItem("ticker_access_token");
+    let userEmail = localStorage.getItem("current_user");
+    if (token && tickerToken && userEmail) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   onSignInClick() {
     this.errorMessage = '';
-    let loginCredentials = this.loginForm.getRawValue();
-    console.log(loginCredentials)
-    if (loginCredentials.rememberMe) {
-      let loggedUser = {
-        userMail: loginCredentials.email,
-        password: loginCredentials.password,
-        rememberMe: loginCredentials.rememberMe
-      };
-      let encryptUserDetails = this.encryptDecryptService.set('userDetails', JSON.stringify(loggedUser));
-      this.cookieService.set('user_details', encryptUserDetails, 20);
-    } else {
-      this.cookieService.delete('user_details');
-    }
+    const loginCredentials = this.loginForm.getRawValue();
     if (loginCredentials.email && loginCredentials.password) {
       this.authService.login(loginCredentials)
         .subscribe(this.onLoginSuccess.bind(this));
@@ -68,6 +71,13 @@ export class LoginComponent implements OnInit {
 
   onLoginSuccess(resp: any) {
     if (resp && resp.success) {
+      const loginCredentials = this.loginForm.getRawValue();
+      if (loginCredentials.rememberMe) {
+        let encryptUserDetails = this.encryptDecryptService.set('user_details', JSON.stringify(loginCredentials));
+        this.cookieService.set('user_details', encryptUserDetails, 30);
+      } else {
+        this.cookieService.delete('user_details');
+      }
       this.authService.loginSuccess(resp);
       this.router.navigate(["/watchlist"]);
     } else {
