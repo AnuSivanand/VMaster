@@ -45,8 +45,8 @@
 					</div>
 				</div>	
 				<div class="col-md-12 col-sm-12 submit-btn-wrap">
-					<button class="btn buy" *ngIf="group.value == 'market'" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Buy @ {{data.ticker.lastPrice}}</button>
-					<button class="btn buy" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Buy </button>
+					<button class="btn buy" *ngIf="group.value == 'market'" [disabled]="!(tradeForm.valid)" (click)="tradeAction()">Buy @ {{data.ticker.lastPrice}}</button>
+					<button class="btn buy" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid)" (click)="tradeAction()">Buy </button>
 				</div>					
 			</form>
 		</div>
@@ -77,8 +77,8 @@
 					</div>
 				</div>	
 				<div class="col-md-12 col-sm-12 submit-btn-wrap">
-					<button class="btn sell" *ngIf="group.value == 'market'" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Sell @ {{data.ticker.lastPrice}}</button>
-					<button class="btn sell" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid && tradeForm.dirty)" (click)="tradeAction()">Sell</button>
+					<button class="btn sell" *ngIf="group.value == 'market'" [disabled]="!(tradeForm.valid)" (click)="tradeAction()">Sell @ {{data.ticker.lastPrice}}</button>
+					<button class="btn sell" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid)" (click)="tradeAction()">Sell</button>
 				</div>		
 			</form>
 		</div>

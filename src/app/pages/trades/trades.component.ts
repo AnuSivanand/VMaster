@@ -31,4 +31,19 @@ export class TradesComponent implements OnInit {
     });
   }
 
+  onCancelClick(trade: any) {
+    // this.apiService.onTradeCancel(tradeStatus).subscribe((resp) => {
+    //   if (resp && resp.status) {
+    //     this.toastrService.success('my success msg')
+    //   } else {
+    //     this.toastrService.error('my error msg')
+    //   }
+    // }, (error) => {
+    //   this.toastrService.error('my error msg')
+    // });
+  }
+
+  onCloseClick(trade: any) {
+    
+  }
 }

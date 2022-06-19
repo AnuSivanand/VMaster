@@ -4,10 +4,10 @@ import { LoginComponent } from './pages/login/login.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: "full"},
+  { path: '', redirectTo: '/login', pathMatch: "full" },
   { path: 'login', component: LoginComponent },
-  { 
-    path: 'vmaster', 
+  {
+    path: '',
     loadChildren: () => import("./pages/pages-wrapper/pages-wrapper.module").then(m => m.PagesWrapperModule)
   },
 ];

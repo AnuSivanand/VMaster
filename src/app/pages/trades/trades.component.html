@@ -54,10 +54,12 @@
               <span>{{trade.formatted_date}}</span>
               <span class="val-wrap-green">{{trade.order_type}}</span>
             </div>
-            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 1">
+            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 1"
+              (click)="onCancelClick(trade)">
               <span class="val-wrap-red">Cancel</span>
             </div>
-            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 0">
+            <div class="col-md-6 col-sm-6" style="margin-top:10px;cursor: pointer;" *ngIf="trade.status == 0"
+              (click)="onCloseClick(trade)">
               <span class="val-wrap-red">Close</span>
             </div>
           </div>

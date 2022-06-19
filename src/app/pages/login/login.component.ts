@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
   onLoginSuccess(resp: any) {
     if (resp && resp.success) {
       this.authService.loginSuccess(resp);
-      this.router.navigate(["/vmaster/watchlist"]);
+      this.router.navigate(["/watchlist"]);
     } else {
       this.toastrService.error(resp.message);
     }

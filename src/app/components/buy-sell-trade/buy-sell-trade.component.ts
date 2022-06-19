@@ -98,6 +98,9 @@ export class BuySellTradeComponent implements OnInit {
       audio.src = "assets/Notification.mp3";
       audio.load();
       audio.play();
+      this.close();
+    }, (error) => {
+      this.close();
     }); 
   }
 
