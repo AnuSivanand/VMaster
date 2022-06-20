@@ -50,9 +50,9 @@ export class LoginComponent implements OnInit {
   }
 
   checkUserIsLoggedIn() {
-    let token = localStorage.getItem("access_token");
-    let tickerToken = localStorage.getItem("ticker_access_token");
-    let userEmail = localStorage.getItem("current_user");
+    const token = localStorage.getItem("access_token"),
+      tickerToken = localStorage.getItem("ticker_access_token"),
+      userEmail = localStorage.getItem("current_user_email");
     if (token && tickerToken && userEmail) {
       return true;
     } else {
