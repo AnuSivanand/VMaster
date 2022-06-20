@@ -53,4 +53,12 @@ export class ApiService {
   changePassword(passObj: any): Observable<any> {
     return this.httpClient.post(this.baseUrl + "change_password", passObj);
   }
+
+  onTradeCancel(id: any): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "cancel_order?id=" + id);
+  }
+
+  onTradeClose(id: any): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "close_order?id=" + id);
+  }
 }

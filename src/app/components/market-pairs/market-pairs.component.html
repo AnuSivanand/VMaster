@@ -1,4 +1,4 @@
-<div class="market-pairs">
+<div class="trades">
   <div class="input-group">
     <ng-multiselect-dropdown class="watchlist-search" [placeholder]="'Search and Add'" [settings]="dropdownSettings"
       [data]="futureStockList" [(ngModel)]="selectedStocks" (onDeSelect)="onItemDeSelect($event)"
@@ -28,7 +28,39 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" role="tabpanel">
-      <table class="table star-active">
+      <div *ngIf="favouriteFutureStocks && favouriteFutureStocks.length" >
+      <div class="close-trade-card" *ngFor="let tickerVal of favouriteFutureStocks">
+          <div class="col-md-12 col-sm-12">
+            <div class="row close-trade-row">
+              <div class="col-md-12 col-sm-12">
+                <span>{{tickerVal.stockName}}</span>
+                <span class="val-wrap-green">LTP - {{tickerVal.lastPrice}}</span>
+              </div>
+            </div>
+            <div class="row close-trade-row">
+              <div class="col-md-12 col-sm-12">
+                <span>Change : {{tickerVal.change}}% </span>
+                <span style="margin-left: 5px;">High : {{tickerVal.ohlc?.high || 0}}</span>
+                <span style="margin-left: 5px;">Low : {{tickerVal.ohlc?.low || 0}} </span>
+                <span style="margin-left: 5px;">Open : {{tickerVal.ohlc?.open || 0}}</span>
+              </div>
+            </div>
+            <div class="row close-trade-row">
+              <div class="col-md-12 col-sm-12">
+                <span style="margin-left: 5px;">close : {{tickerVal.ohlc?.close || 0}} </span>
+                <span style="margin-left: 5px;">volume : {{tickerVal.volume}}</span>
+                <span class="val-wrap-green" style="cursor:pointer;" (click)="openDialog('buy', tickerVal)">Buy</span>
+              
+                <span class="val-wrap-red" style="cursor:pointer;" (click)="openDialog('sell', tickerVal)">Sell</span>
+
+                <span class="val-wrap-red" style="cursor:pointer;" (click)="onDeleteStockItem(tickerVal)">Remove</span>
+              </div>
+              
+            </div>
+          </div>          
+        </div>
+      </div>
+      <table class="table star-active" *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
         <thead>
           <tr>
             <th>Script</th>
@@ -39,22 +71,19 @@
             <th style="text-align:right;">Open</th>
             <th style="text-align:right;">Close</th>
             <th style="text-align:right;">Volume</th>
-            <th style="text-align:right;">Buy</th>
-            <th style="text-align:right;">Sell</th>
-            <th style="text-align:right;">Delete</th>
           </tr>
         </thead>
         <tbody *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
           <tr>
-            <td colspan="11" class="no-data">No data available.</td>
+            <td colspan="8" class="no-data">No data available.</td>
           </tr>
         </tbody>
-        <tbody *ngIf="favouriteFutureStocks && favouriteFutureStocks.length">
+        <!--<tbody *ngIf="favouriteFutureStocks && favouriteFutureStocks.length">
           <tr *ngFor="let tickerVal of favouriteFutureStocks" class="ticker-row">
             <td width="13%" style="text-align:left;">{{tickerVal.stockName}} </td>
             <td width="9%" style="text-align:right;"> {{tickerVal.lastPrice}} </td>
             <td width="9%" style="text-align:right;"> {{tickerVal.change}}%</td>
-            <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> -->
+            <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> 
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.high || 0}}</td>
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.low || 0}}</td>
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.open || 0}}</td>
@@ -76,13 +105,13 @@
               </div>
             </td>
           </tr>
-          <!-- <tr>
+           <tr>
             <td><i class="icon ion-md-star"></i> KCS/BTC</td>
             <td>0.00013192</td>
             <td class="green">+5.6%</td>            
             <td class="red">-2.58%</td>
-          </tr> -->
-        </tbody>
+          </tr> 
+        </tbody>-->
       </table>
     </div>
   </div>
