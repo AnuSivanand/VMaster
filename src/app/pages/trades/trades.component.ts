@@ -38,6 +38,10 @@ export class TradesComponent implements OnInit {
        } else {
          this.toastrService.error(resp.message)
        }
+        let audio = new Audio();
+        audio.src = "assets/Notification.mp3";
+        audio.load();
+        audio.play();
        this.getTrades(this.tradeStatus);
      }, (error) => {
        this.toastrService.error('my error msg')
