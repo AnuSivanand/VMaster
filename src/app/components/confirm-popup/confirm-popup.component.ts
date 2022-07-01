@@ -22,15 +22,14 @@ export class ConfirmPopupComponent implements OnInit {
     console.log(data)
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   close() {
     this.dialogRef.close(true);
   }
 
   cancelClick() {
-    this.dialogRef.close(true);
+    this.dialogRef.close(false);
   }
 
   tradeCancel() {
@@ -44,10 +43,10 @@ export class ConfirmPopupComponent implements OnInit {
       audio.src = "assets/Notification.mp3";
       audio.load();
       audio.play();
-      // this.dialogRef.afterClosed({'refetch': true});
-      // this.getTrades(this.tradeStatus);
+      this.dialogRef.close({ 'status': 'cancelled' });
     }, (error) => {
-      this.toastrService.error('my error msg')
+      this.toastrService.error('Error on cancelling order.')
+      this.cancelClick();
     });
   }
 

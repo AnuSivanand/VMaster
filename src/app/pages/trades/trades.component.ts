@@ -37,15 +37,14 @@ export class TradesComponent implements OnInit {
 
   onCancelClick(trade: any) {
     this.dialogConfig.data = {
-      id: 'cancel-order',
       trade: trade
     };
-    this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
-    this.matDialogRef._getAfterAllClosed().subscribe((data: any) => {
-      console.log('closeddddd', data)
-      this.getTrades(this.tradeStatus);
+    const dialogRef = this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result.status == 'cancelled') {
+        this.getTrades(this.tradeStatus);
+      }
     });
-
   }
 
   onCloseClick(trade: any) {
