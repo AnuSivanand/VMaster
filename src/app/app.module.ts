@@ -29,6 +29,7 @@ import { LoaderInterceptor } from './shared/interceptors/loader/loader.intercept
 import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/stock-delete-confirm.component';
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptDecryptService } from './shared/services/encrypt-decrypt/encrypt-decrypt.service';
+import { ConfirmPopupComponent } from './components/confirm-popup/confirm-popup.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EncryptDecryptService } from './shared/services/encrypt-decrypt/encrypt
     TradesComponent,
     PortfolioComponent,
     WatchlistFilterPipe,
-    StockDeleteConfirmComponent
+    StockDeleteConfirmComponent,
+    ConfirmPopupComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,7 @@ export class MarketPairsComponent implements OnInit {
   public selectedStocks = [];
   public dropdownSettings: IDropdownSettings = {};
   public loading: boolean = false;
-  public exchangeType: String = 'NFO';
+  public exchangeType: String = 'MCX';
 
   constructor(    
     private matDialogRef: MatDialog,
@@ -142,6 +142,7 @@ export class MarketPairsComponent implements OnInit {
       ticker: ticker
     };
     this.matDialogRef.open(BuySellTradeComponent, this.dialogConfig);
+    // this.matDialogRef.componentInstance.favouriteStocks = this.favouriteFutureStocks;
   }
 
   onDeleteStockItem(ticker: any) {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmPopupComponent } from 'src/app/components/confirm-popup/confirm-popup.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 
 @Component({
@@ -11,16 +13,18 @@ export class TradesComponent implements OnInit {
 
   public tradeStatus: string = 'pending';
   public tradeList!: any[];
+  public dialogConfig: MatDialogConfig;
 
   constructor(
+    private matDialogRef: MatDialog,
     private apiService: ApiService,
     private toastrService: ToastrService
   ) {
+    this.dialogConfig = new MatDialogConfig();
     this.getTrades(this.tradeStatus);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {  }
 
   getTrades(tradeStatus: string) {
     this.tradeStatus = tradeStatus;
@@ -32,20 +36,16 @@ export class TradesComponent implements OnInit {
   }
 
   onCancelClick(trade: any) {
-     this.apiService.onTradeCancel(trade.id).subscribe((resp) => {
-       if (resp && resp.status) {
-         this.toastrService.success(resp.message)
-       } else {
-         this.toastrService.error(resp.message)
-       }
-        let audio = new Audio();
-        audio.src = "assets/Notification.mp3";
-        audio.load();
-        audio.play();
-       this.getTrades(this.tradeStatus);
-     }, (error) => {
-       this.toastrService.error('my error msg')
-     });
+    this.dialogConfig.data = {
+      id: 'cancel-order',
+      trade: trade
+    };
+    this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
+    this.matDialogRef._getAfterAllClosed().subscribe((data: any) => {
+      console.log('closeddddd', data)
+      this.getTrades(this.tradeStatus);
+    });
+
   }
 
   onCloseClick(trade: any) {

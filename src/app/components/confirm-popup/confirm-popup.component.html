@@ -1,0 +1,15 @@
+<div class="popup">
+	<div align="end">
+		<a (click)="close()">
+			<i class="icon ion-md-close dialog-close"></i>
+		</a>
+	</div>
+	<div class="popup-title">Cancel Order</div>
+	<mat-dialog-content>
+		<p class="confirm-text">Do you want to cancel the order <b>{{trade.trading_symbol}}</b>?</p>
+	</mat-dialog-content>
+	<div align="end">
+		<button class="btn cancel" (click)="cancelClick()">Cancel</button>
+		<button class="btn delete" (click)="tradeCancel()">Yes</button>
+	</div>
+</div>
