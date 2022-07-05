@@ -28,7 +28,7 @@
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" role="tabpanel">
-      <div *ngIf="favouriteFutureStocks && favouriteFutureStocks.length" >
+      <div *ngIf="favouriteFutureStocks && favouriteFutureStocks.length" class="trade-card-list" >
       <div class="close-trade-card" *ngFor="let tickerVal of favouriteFutureStocks">
           <div class="col-md-12 col-sm-12">
             <div class="row close-trade-row">
@@ -39,16 +39,16 @@
             </div>
             <div class="row close-trade-row">
               <div class="col-md-12 col-sm-12">
-                <span>Change : {{tickerVal.change}}% </span>
-                <span style="margin-left: 5px;">High : {{tickerVal.ohlc?.high || 0}}</span>
-                <span style="margin-left: 5px;">Low : {{tickerVal.ohlc?.low || 0}} </span>
-                <span style="margin-left: 5px;">Open : {{tickerVal.ohlc?.open || 0}}</span>
+                <span class="trade-info">Change : {{tickerVal.change}}% </span>
+                <span class="trade-info">High : {{tickerVal.ohlc?.high || 0}}</span>
+                <span class="trade-info">Low : {{tickerVal.ohlc?.low || 0}} </span>
+                <span class="trade-info">Open : {{tickerVal.ohlc?.open || 0}}</span>
               </div>
             </div>
             <div class="row close-trade-row">
               <div class="col-md-12 col-sm-12">
-                <span style="margin-left: 5px;">close : {{tickerVal.ohlc?.close || 0}} </span>
-                <span style="margin-left: 5px;">volume : {{tickerVal.volume}}</span>
+                <span class="trade-info">close : {{tickerVal.ohlc?.close || 0}} </span>
+                <span class="trade-info">volume : {{tickerVal.volume}}</span>
                 <span class="val-wrap-green cursor-pointer" (click)="openDialog('buy', tickerVal)">Buy</span>
                 <span class="val-wrap-red cursor-pointer" (click)="openDialog('sell', tickerVal)">Sell</span>
                 <span class="val-wrap-red cursor-pointer" (click)="onDeleteStockItem(tickerVal)">Remove</span>
@@ -81,7 +81,7 @@
             <td width="13%" style="text-align:left;">{{tickerVal.stockName}} </td>
             <td width="9%" style="text-align:right;"> {{tickerVal.lastPrice}} </td>
             <td width="9%" style="text-align:right;"> {{tickerVal.change}}%</td>
-            <!-- <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> 
+             <td class="alignleft"> {{(tickerVal.lastPrice - tickerVal.ohlc.close) * 100 / tickerVal.ohlc.close || 0 | number}} %</td> 
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.high || 0}}</td>
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.low || 0}}</td>
             <td width="9%" style="text-align:right;"> {{tickerVal.ohlc?.open || 0}}</td>
@@ -113,4 +113,13 @@
       </table>
     </div>
   </div>
+</div>
+
+<div class="mobile-bottom-menu">
+  <ul>
+    <li class="active">Watchlist</li>
+    <li>Trades</li>
+    <li>Portifolio</li>
+    <li>Profile</li>
+  </ul>
 </div>

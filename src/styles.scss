@@ -2,3 +2,117 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "assets/css/ionicons.min.css";
 @import "assets/scss/style.scss";
+
+
+.light-bb{
+    border: 0;
+}
+.trade-info{
+    margin-right: 12px;
+}
+
+
+
+@media (max-width: 768px) {
+    html,body{
+        height: 100%;
+    }
+    body{
+    }
+    .trades{
+        padding: 10px;
+    }
+    .close-trade-row{
+        padding: 5px 0;
+    }
+    .close-trade-card{
+        width: 100%;
+        margin: 0 0 10px 0;
+        background-color: #fff;
+        box-shadow: none;
+        border-color: #dce4eb;
+        border-radius: 10px;
+    }
+    .trade-card-list{
+        // padding: 10px;
+    }
+    .trades .multiselect-dropdown .dropdown-btn{
+        background-color: #dce4eb;
+        border: 0 !important;
+        padding: 9px 12px !important;
+        .dropdown-multiselect__caret
+        {
+            width: 35px !important;
+            height: 39px !important;
+            &:before{
+                border-width: 6px 6px 0 !important;
+            }
+        }
+    }
+    
+    .trade-info{
+        margin-right: 12px;
+        display: inline-block;
+        font-size: 12px;
+    }
+
+    .trades .nav{
+        background-color: transparent;
+        margin-bottom: 10px;
+        display: flex;
+        .nav-item{
+            flex: 1;
+            .nav-link{
+                padding: 5px 7px;
+                width: 100%;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #a9b5bf;
+                font-weight: 600;                
+                font-size: 13px;
+                &.active{
+                    color: #005db0;
+                    &:after{
+                        content: "";
+                        height: 2px;
+                        width: 100%;
+                        background-color: #005db0;
+                        margin-top: 2px;
+                    }
+                }
+            }
+        }
+    }
+
+    .mobile-bottom-menu{
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-top: 1px solid #dce4eb;
+        ul{
+            display: flex;
+            width: 100%;
+            li{
+                flex: 1;
+                padding: 18px 15px;
+                font-weight: 700;
+                color: #a9b5bf;
+                &.active{
+                    color: #005db0;
+                }
+            }
+        }
+    }
+
+    .dropdown-list{
+        margin-top: 0 !important;
+    }
+    
+
+    
+
+}
