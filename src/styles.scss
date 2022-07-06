@@ -93,6 +93,7 @@
         left: 0;
         width: 100%;
         border-top: 1px solid #dce4eb;
+        background-color: #fff;
         ul{
             display: flex;
             width: 100%;
@@ -110,6 +111,36 @@
 
     .dropdown-list{
         margin-top: 0 !important;
+    }
+
+    .header-menu{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border-top: 1px solid #dce4eb;
+        height: 60px;
+        ul{
+            width: 100%;
+            li.nav-item{
+                flex: 1;
+                text-align: center;
+                .nav-link{
+                    font-weight: 600;
+                    &.active{
+                        color: #005db0 !important;
+                        font-weight: 700;
+                    }
+                }
+                
+            }
+        }
+        .profile-wrapper{
+            position: absolute;
+            top: auto;
+            bottom: 100%;
+        }
     }
     
 
