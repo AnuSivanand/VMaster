@@ -35,7 +35,7 @@
         padding-bottom: 60px;
     }
     .trades{
-        padding: 10px;
+        padding: 0 10px 10px 10px;
     }
     .close-trade-row{
         padding: 5px 0;
@@ -164,7 +164,13 @@
     .popup{
         width: 100% !important;
     }
-    
+    .learn-trade-logo{
+        display: none;
+    }
+
+    .navbar-brand h2{
+        display: block;
+    }
 
     
 
@@ -176,5 +182,12 @@
         img{
             max-width: 15px !important;
         }
+    }
+
+    .learn-trade-logo{
+        display: block;
+    }
+    .navbar-brand h2{
+        display: none;
     }
 }
