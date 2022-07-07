@@ -1,13 +1,16 @@
 <div class="popup">
-	<div align="end">
+
+	<div class="d-flex align-items-center justify-content-between">
+		<div class="popup-title">Equity Trade</div>
+
 		<a (click)="close()">
 			<i class="icon ion-md-close dialog-close"></i>
 		</a>
 	</div>
-	<div class="popup-title">Equity Trade</div>
+
 	<mat-dialog-content *ngIf="itemTicker">
-		<div class="text-container">
-			<span class="title">{{ itemTicker.stockName}}</span>
+		<div class="text-container mt-4">
+			<span class="title mb-3">{{ itemTicker.stockName}}</span>
 			<mat-button-toggle-group name="equityType" #group="matButtonToggleGroup" [value]="equityType"
 				(change)="onValChange($event.value)">
 				<mat-button-toggle value="market">
@@ -18,15 +21,17 @@
 				</mat-button-toggle>
 			</mat-button-toggle-group>
 		</div>
-		<div class="trade-buy" *ngIf="data.type == 'buy'">
+		<div class="trade-buy mt-1" *ngIf="data.type == 'buy'">
 			<form [formGroup]="tradeForm">
 				<div class="input-group">
-					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity" required />
+					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity"
+						required />
 				</div>
 				<div class="input-group" *ngIf="group.value == 'order'">
-					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice" required />
+					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice"
+						required />
 				</div>
-				<div class="col-md-12 col-sm-12 submit-btn-wrap">
+				<div class="col-md-12 col-sm-12 submit-btn-wrap mb-3">
 					<button class="btn buy" *ngIf="group.value == 'market'"
 						[disabled]="!(tradeForm.valid) || !itemTicker.lastPrice" (click)="tradeAction()">Buy @
 						{{itemTicker.lastPrice}}</button>
@@ -57,10 +62,12 @@
 		<div class="trade-buy" *ngIf="data.type == 'sell'">
 			<form [formGroup]="tradeForm">
 				<div class="input-group">
-					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity" required />
+					<input type="number" class="form-control" placeholder="Quantity" formControlName="quantity"
+						required />
 				</div>
 				<div class="input-group" *ngIf="group.value == 'order'">
-					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice" required />
+					<input type="number" class="form-control" placeholder="Amount" formControlName="lastPrice"
+						required />
 				</div>
 				<div class="col-md-12 col-sm-12 submit-btn-wrap">
 					<button class="btn sell" *ngIf="group.value == 'market'"

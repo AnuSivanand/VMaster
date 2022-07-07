@@ -161,8 +161,20 @@
     .navbar-text{
         display: none;
     }
+    .popup{
+        width: 100% !important;
+    }
     
 
     
 
+}
+
+
+@media (min-width: 768px) {
+    .navbar-icon{
+        img{
+            max-width: 15px !important;
+        }
+    }
 }
