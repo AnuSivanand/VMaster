@@ -61,4 +61,12 @@ export class ApiService {
   onTradeClose(id: any): Observable<any> {
     return this.httpClient.get(this.baseUrl + "close_order?id=" + id);
   }
+
+  buyOrder(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "buy_order");
+  }
+
+  sellOrder(): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "sell_order");
+  }
 }

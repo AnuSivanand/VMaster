@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmPopupComponent } from 'src/app/components/confirm-popup/confirm-popup.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-trades',
@@ -22,9 +23,14 @@ export class TradesComponent implements OnInit {
   ) {
     this.dialogConfig = new MatDialogConfig();
     this.getTrades(this.tradeStatus);
+    interval(5000).subscribe(() => {
+    
+      //this.getTrades(this.tradeStatus);
+
+    })
   }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   getTrades(tradeStatus: string) {
     this.tradeStatus = tradeStatus;
@@ -37,26 +43,29 @@ export class TradesComponent implements OnInit {
 
   onCancelClick(trade: any) {
     this.dialogConfig.data = {
-      trade: trade
+      trade: trade,
+      type: 'cancel'
     };
     const dialogRef = this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((result: any) => {
-      if (result.status == 'cancelled') {
+      console.log(result)
+      if (result.status === 'cancelled') {
         this.getTrades(this.tradeStatus);
       }
     });
+
   }
 
   onCloseClick(trade: any) {
-    this.apiService.onTradeClose(trade.id).subscribe((resp) => {
-       if (resp && resp.status) {
-         this.toastrService.success(resp.message)
-       } else {
-         this.toastrService.error(resp.message)
-       }
-       this.getTrades(this.tradeStatus);
-     }, (error) => {
-       this.toastrService.error('my error msg')
-     });
+    this.dialogConfig.data = {
+      trade: trade,
+      type: 'close'
+    };
+    const dialogRef = this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result.status === 'closed') {
+        this.getTrades(this.tradeStatus);
+      }
+    });
   }
 }

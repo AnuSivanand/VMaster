@@ -11,6 +11,7 @@ import { ApiService } from 'src/app/shared/services/api/api.service';
 export class ConfirmPopupComponent implements OnInit {
 
   public trade: any;
+  public type: string;
 
   constructor(
     private dialogRef: MatDialogRef<ConfirmPopupComponent>,
@@ -19,7 +20,7 @@ export class ConfirmPopupComponent implements OnInit {
     private toastrService: ToastrService
   ) {
     this.trade = data.trade;
-    console.log(data)
+    this.type = data.type;
   }
 
   ngOnInit(): void { }
@@ -30,6 +31,14 @@ export class ConfirmPopupComponent implements OnInit {
 
   cancelClick() {
     this.dialogRef.close(false);
+  }
+
+  tradeActionsClick() {
+    if (this.type === 'cancel') {
+      this.tradeCancel();
+    } else if (this.type === 'close') {
+      this.tradeClose();
+    }
   }
 
   tradeCancel() {
@@ -46,6 +55,24 @@ export class ConfirmPopupComponent implements OnInit {
       this.dialogRef.close({ 'status': 'cancelled' });
     }, (error) => {
       this.toastrService.error('Error on cancelling order.')
+      this.cancelClick();
+    });
+  }
+
+  tradeClose() {
+    this.apiService.onTradeClose(this.trade.id).subscribe((resp) => {
+      if (resp && resp.status) {
+        this.toastrService.success(resp.message)
+      } else {
+        this.toastrService.error(resp.message)
+      }
+      let audio = new Audio();
+      audio.src = "assets/Notification.mp3";
+      audio.load();
+      audio.play();
+      this.dialogRef.close({ 'status': 'closed' });
+    }, (error) => {
+      this.toastrService.error('Error on closing order.')
       this.cancelClick();
     });
   }

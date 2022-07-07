@@ -45,7 +45,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
                 this.authService.finishLogout();
               }
               break;
-            default: this.toastrService.error("Error Processing Request");
+            default: //this.toastrService.error("Error Processing Request");
               break;
           }
         }

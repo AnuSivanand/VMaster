@@ -66,11 +66,11 @@ import { ConfirmPopupComponent } from './components/confirm-popup/confirm-popup.
   providers: [
     EncryptDecryptService,
     CookieService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: LoaderInterceptor,
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
