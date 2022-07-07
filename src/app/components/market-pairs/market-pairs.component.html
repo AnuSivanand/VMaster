@@ -33,22 +33,22 @@
           <div class="col-md-12 col-sm-12">
             <div class="row close-trade-row">
               <div class="col-md-12 col-sm-12">
-                <span>{{tickerVal.stockName}}</span>
+                <span class="trade-name fw-bold">{{tickerVal.stockName}}</span>
                 <span class="val-wrap-green">LTP - {{tickerVal.lastPrice}}</span>
               </div>
             </div>
             <div class="row close-trade-row">
               <div class="col-md-12 col-sm-12">
-                <span class="trade-info">Change : {{tickerVal.change}}% </span>
-                <span class="trade-info">High : {{tickerVal.ohlc?.high || 0}}</span>
-                <span class="trade-info">Low : {{tickerVal.ohlc?.low || 0}} </span>
-                <span class="trade-info">Open : {{tickerVal.ohlc?.open || 0}}</span>
+                <span class="trade-info">Change : <span class="fw-bold">{{tickerVal.change}}%</span> </span>
+                <span class="trade-info">High : <span class="fw-bold">{{tickerVal.ohlc?.high || 0}}</span></span>
+                <span class="trade-info">Low : <span class="fw-bold">{{tickerVal.ohlc?.low || 0}}</span> </span>
+                <span class="trade-info">Open : <span class="fw-bold">{{tickerVal.ohlc?.open || 0}}</span></span>
               </div>
             </div>
             <div class="row close-trade-row">
               <div class="col-md-12 col-sm-12">
-                <span class="trade-info">close : {{tickerVal.ohlc?.close || 0}} </span>
-                <span class="trade-info">volume : {{tickerVal.volume}}</span>
+                <span class="trade-info">close : <span class="fw-bold">{{tickerVal.ohlc?.close || 0}}</span> </span>
+                <span class="trade-info">volume : <span class="fw-bold">{{tickerVal.volume}}</span></span>
                 <span class="val-wrap-green cursor-pointer" (click)="openDialog('buy', tickerVal)">Buy</span>
                 <span class="val-wrap-red cursor-pointer" (click)="openDialog('sell', tickerVal)">Sell</span>
                 <span class="val-wrap-red cursor-pointer" (click)="onDeleteStockItem(tickerVal)">Remove</span>

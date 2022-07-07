@@ -143,9 +143,11 @@
                 text-align: center;
                 .nav-link{
                     font-weight: 600;
+                    opacity: 0.3;
                     &.active{
                         color: #005db0 !important;
                         font-weight: 700;
+                        opacity: 1;
                     }
                 }
                 
@@ -170,9 +172,18 @@
 
     .navbar-brand h2{
         display: block;
+        color: #005db0;
     }
     .navbar{
         justify-content: center;
+    }
+
+    span{
+        font-size: 12px;
+    }
+    
+    .trade-name{
+        color: #005db0;
     }
 
     
