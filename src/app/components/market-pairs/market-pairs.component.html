@@ -1,5 +1,5 @@
 <div class="trades">
-  <div class="input-group">
+  <div class="input-group" style="margin-top:10px;">
     <ng-multiselect-dropdown class="watchlist-search" [placeholder]="'Search and Add'" [settings]="dropdownSettings"
       [data]="futureStockList" [(ngModel)]="selectedStocks" (onDeSelect)="onItemDeSelect($event)"
       (onDropDownClose)="onDropDownClose()">
@@ -49,9 +49,9 @@
               <div class="col-md-12 col-sm-12">
                 <span class="trade-info">close : <span class="fw-bold">{{tickerVal.ohlc?.close || 0}}</span> </span>
                 <span class="trade-info">volume : <span class="fw-bold">{{tickerVal.volume}}</span></span>
-                <span class="val-wrap-green cursor-pointer" (click)="openDialog('buy', tickerVal)">Buy</span>
-                <span class="val-wrap-red cursor-pointer" (click)="openDialog('sell', tickerVal)">Sell</span>
-                <span class="val-wrap-red cursor-pointer" (click)="onDeleteStockItem(tickerVal)">Remove</span>
+                <span class="val-wrap-green cursor-pointer" style="font-size:20px;" (click)="openDialog('buy', tickerVal)">Buy</span>
+                <span class="val-wrap-red cursor-pointer" style="font-size:20px;" (click)="openDialog('sell', tickerVal)">Sell</span>
+                <span class="val-wrap-red cursor-pointer" style="font-size:20px;" (click)="onDeleteStockItem(tickerVal)">Remove</span>
               </div>
               
             </div>
@@ -61,14 +61,6 @@
       <table class="table star-active" *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
         <thead>
           <tr>
-            <th>Script</th>
-            <th style="text-align:right;">LTP</th>
-            <th style="text-align:right;">Change</th>
-            <th style="text-align:right;">High</th>
-            <th style="text-align:right;">Low</th>
-            <th style="text-align:right;">Open</th>
-            <th style="text-align:right;">Close</th>
-            <th style="text-align:right;">Volume</th>
           </tr>
         </thead>
         <tbody *ngIf="!favouriteFutureStocks || !favouriteFutureStocks.length">
