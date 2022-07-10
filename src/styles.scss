@@ -138,6 +138,7 @@
         height: 60px;
         ul{
             width: 100%;
+            background:#84ebb7;
             li.nav-item{
                 flex: 1;
                 text-align: center;
@@ -149,6 +150,7 @@
                         color: #005db0 !important;
                         font-weight: 700;
                         opacity: 1;
+                        background: none;
                     }
                 }
                 
