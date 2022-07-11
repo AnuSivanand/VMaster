@@ -49,9 +49,16 @@
               <div class="col-md-12 col-sm-12">
                 <span class="trade-info">close : <span class="fw-bold">{{tickerVal.ohlc?.close || 0}}</span> </span>
                 <span class="trade-info">volume : <span class="fw-bold">{{tickerVal.volume}}</span></span>
-                <span class="val-wrap-green cursor-pointer" style="font-size:20px;" (click)="openDialog('buy', tickerVal)">Buy</span>
-                <span class="val-wrap-red cursor-pointer" style="font-size:20px;" (click)="openDialog('sell', tickerVal)">Sell</span>
-                <span class="val-wrap-red cursor-pointer" style="font-size:20px;" (click)="onDeleteStockItem(tickerVal)">Remove</span>
+                <span class="val-wrap-green cursor-pointer" style="font-size: 25px;
+    width: 85px !important;
+    display: inline-block;
+    text-align: center;" (click)="openDialog('buy', tickerVal)">Buy</span>
+                <span class="val-wrap-red cursor-pointer" style="font-size: 25px;
+    width: 85px !important;
+    display: inline-block;
+    text-align: center;" (click)="openDialog('sell', tickerVal)">Sell</span>
+                <span class="material-symbols-outlined cursor-pointer delete-icon" style="    margin-top: 10px;
+    float: right;" (click)="onDeleteStockItem(tickerVal)"> delete_forever </span>
               </div>
               
             </div>
