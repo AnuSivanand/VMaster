@@ -53,9 +53,9 @@
 
 					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.cmp - trade.amount)*trade.qty*lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Buy' && exchnage_type == 2">{{(trade.cmp - trade.amount)*trade.qty*lot_size | number : '1.2-2'}}</span>
 
-					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'">{{(trade.amount - trade.cmp)*trade.qty | number : '1.2-2'}}</span>
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell' && exchnage_type == 1">{{(trade.amount - trade.cmp)*trade.qty | number : '1.2-2'}}</span>
 
-					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty*lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'">{{(trade.amount - trade.cmp)*trade.qty*lot_size | number : '1.2-2'}}</span>
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty*lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'  && exchnage_type == 2">{{(trade.amount - trade.cmp)*trade.qty*lot_size | number : '1.2-2'}}</span>
 				  </div>
 				</div>
 	  
