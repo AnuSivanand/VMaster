@@ -23,4 +23,56 @@
 			</div>
 		</div>
 	</div>
+	<div class="card" *ngIf="orderList">
+		<div class="" style="border-bottom: 1px solid black;margin-bottom: 5px;" *ngFor="let trade of orderList">
+			<div class="col-md-12 col-sm-12">
+				<div class="row close-trade-row">
+				  <div class="col-md-12">
+					<div class="d-flex justify-content-between">
+					<div>
+					  <span class="val-wrap-green" *ngIf="trade.action == 'Buy'"> {{trade.action}} X
+						{{trade.remaining_qty}}</span>
+					  <span class="val-wrap-red" *ngIf="trade.action == 'Sell'"> {{trade.action}} X
+						{{trade.remaining_qty}}</span>
+					  <span class="val-wrap-green">{{trade.order_type}}</span>
+					</div>
+					<span class="fw-bold ms-2">{{trade.formatted_date}}</span>
+				  </div>
+				  </div>
+	  
+				</div>
+	  
+				<div class="row close-trade-row">
+				  <div class="col-8 col-md-8 col-sm-8">
+					<span class="fw-bold">{{trade.trading_symbol}} @ {{trade.amount}}</span>
+					
+				  </div>
+				  <div class="col-4 col-md-4 col-sm-4  close-end-col">
+
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.cmp - trade.amount)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Buy'  && exchnage_type == 1">{{(trade.cmp - trade.amount)*trade.qty | number : '1.2-2'}}</span>
+
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.cmp - trade.amount)*trade.qty*lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Buy' && exchnage_type == 2">{{(trade.cmp - trade.amount)*trade.qty*lot_size | number : '1.2-2'}}</span>
+
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'">{{(trade.amount - trade.cmp)*trade.qty | number : '1.2-2'}}</span>
+
+					<span class="fw-bold ms-4" [ngStyle]="{'color': (((trade.amount - trade.cmp)*trade.qty*lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'">{{(trade.amount - trade.cmp)*trade.qty*lot_size | number : '1.2-2'}}</span>
+				  </div>
+				</div>
+	  
+  
+				<div class="row close-trade-row">
+				  <div class="col-6 col-md-6 col-sm-6 ">
+					<span>Margin Used : </span>
+					<span class="fw-bold ms-2">{{trade.margin}}</span>
+				  </div>
+				  <div class="col-6 col-md-6 col-sm-6 close-end-col">
+					<span>CMP: </span>
+					<span class="fw-bold ms-2">{{trade.cmp}}</span>
+				  </div>
+	  
+				</div>
+	  
+			  </div>
+		</div>
+	</div>
 </div>
