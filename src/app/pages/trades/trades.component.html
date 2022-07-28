@@ -133,8 +133,9 @@
             </div>
 
             <div class="col-6 col-md-6 col-sm-6 close-end-col">
-              <span class="val-wrap-green" *ngIf="trade.profit > 0">{{trade.profit}} / {{trade.brokerage}}</span>
+              <span class="val-wrap-green" *ngIf="trade.profit > 0">{{trade.profit}} / - {{trade.brokerage}}</span>
               <span class="val-wrap-red" *ngIf="trade.profit < 0">{{trade.profit}} / - {{trade.brokerage}}</span>
+              <span class="val-wrap-green" *ngIf="trade.profit == 0">{{trade.profit}} / - {{trade.brokerage}}</span>
               <span class="val-wrap-green">QTY : {{trade.remaining_qty}}</span>
             </div>
           </div>
