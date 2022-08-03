@@ -92,20 +92,21 @@
           </div>
 
           <div class="row close-trade-row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-6 col-md-6 col-sm-6 ">
               <span class="fw-bold">{{trade.trading_symbol}}</span>
-              <span class="fw-bold ms-4">{{trade.amount}}</span>
+              
             </div>
-            <div class="col-md-6 col-sm-6  close-end-col">
-
+            <div class="col-6 col-md-6 col-sm-6 close-end-col">
+              <span class="fw-bold">{{trade.amount}}</span>
             </div>
           </div>
 
           <div class="row close-trade-row">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-6 col-md-6 col-sm-6">
               <span *ngIf="trade.action == 'Buy'">Bought By Trader</span>
               <span *ngIf="trade.action == 'Sell'">Sold By Trader</span>
-
+              </div>
+            <div class="col-6 col-md-6 col-sm-6 close-end-col">
               <span class="val-wrap-red" style="cursor: pointer;" (click)="onCloseClick(trade)">Close Order</span>
             </div>
           </div>
@@ -132,6 +133,9 @@
             </div>
 
             <div class="col-6 col-md-6 col-sm-6 close-end-col">
+              <span class="val-wrap-green" *ngIf="trade.profit > 0">{{trade.profit}} / - {{trade.brokerage}}</span>
+              <span class="val-wrap-red" *ngIf="trade.profit < 0">{{trade.profit}} / - {{trade.brokerage}}</span>
+              <span class="val-wrap-green" *ngIf="trade.profit == 0">{{trade.profit}} / - {{trade.brokerage}}</span>
               <span class="val-wrap-green">QTY : {{trade.remaining_qty}}</span>
             </div>
           </div>

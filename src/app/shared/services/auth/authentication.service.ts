@@ -27,7 +27,8 @@ export class AuthenticationService {
     localStorage.setItem("access_token", loginResp.token);
     localStorage.setItem("ticker_access_token", loginResp.tickerToken)
     localStorage.setItem("current_user_email", loginResp.user?.email);
-    sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
+    localStorage.setItem("current_user", JSON.stringify(loginResp.user));
+    //sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
     this.user = loginResp.user;
     this.logged.next(this.user);
   }
@@ -40,7 +41,8 @@ export class AuthenticationService {
     localStorage.removeItem("access_token");
     localStorage.removeItem("ticker_access_token");
     localStorage.removeItem("current_user_email");
-    sessionStorage.removeItem("current_user");
+    localStorage.removeItem("current_user");
+    //sessionStorage.removeItem("current_user");
     this.router.navigateByUrl("/login");
   }
 

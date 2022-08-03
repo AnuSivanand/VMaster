@@ -5,7 +5,6 @@ import { TickFull } from 'kiteconnect-ts/dist/types/ticker';
 import { ToastrService } from 'ngx-toastr';
 import { Constants } from 'src/app/shared/common/constant';
 import { ApiService } from 'src/app/shared/services/api/api.service';
-import { TickerServiceService } from 'src/app/shared/services/ticker/ticker-service.service';
 
 @Component({
   selector: 'app-close-order',
@@ -16,14 +15,13 @@ export class CloseOrderComponent implements OnInit {
 
   public trade: any;
   public type: string;
-  public itemTicker: any = null;
+  public itemTicker: any;
 
   constructor(
     private dialogRef: MatDialogRef<CloseOrderComponent>,
     @Inject(MAT_DIALOG_DATA) data: any,
     private apiService: ApiService,
-    private toastrService: ToastrService,
-    private tickerService: TickerServiceService
+    private toastrService: ToastrService
   ) {
     this.trade = data.trade;
     this.type = data.type;

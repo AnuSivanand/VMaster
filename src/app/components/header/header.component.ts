@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userDetails = JSON.parse(sessionStorage.getItem("current_user") || "");
+    this.userDetails = JSON.parse(localStorage.getItem("current_user") || "");
     if (!this.userDetails) {
       this.authService.logout();
     }

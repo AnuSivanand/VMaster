@@ -3,7 +3,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmPopupComponent } from 'src/app/components/confirm-popup/confirm-popup.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
-import { interval } from 'rxjs';
 import { CloseOrderComponent } from './close-order/close-order.component';
 
 @Component({
@@ -24,10 +23,6 @@ export class TradesComponent implements OnInit {
   ) {
     this.dialogConfig = new MatDialogConfig();
     this.getTrades(this.tradeStatus);
-    
-    interval(5000).subscribe(() => {    
-      //this.getTrades(this.tradeStatus);
-    })
   }
 
   ngOnInit(): void { }

@@ -33,10 +33,10 @@
 				</div>
 				<div class="col-md-12 col-sm-12 submit-btn-wrap mb-3">
 					<button class="btn buy" *ngIf="group.value == 'market'"
-						[disabled]="!(tradeForm.valid) || !itemTicker.lastPrice" (click)="tradeAction()">Buy @
+						[disabled]="!(tradeForm.valid) || !itemTicker.lastPrice" (click)="tradeAction($event)">Buy @
 						{{itemTicker.lastPrice}}</button>
 					<button class="btn buy" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid)"
-						(click)="tradeAction()">Buy </button>
+						(click)="tradeAction($event);">Buy </button>
 				</div>
 				<div class="col-md-12 col-sm-12">
 					<div class="row">
@@ -71,10 +71,10 @@
 				</div>
 				<div class="col-md-12 col-sm-12 submit-btn-wrap">
 					<button class="btn sell" *ngIf="group.value == 'market'"
-						[disabled]="!(tradeForm.valid) || !itemTicker.lastPrice" (click)="tradeAction()">Sell @
+						[disabled]="!(tradeForm.valid) || !itemTicker.lastPrice" (click)="tradeAction($event)">Sell @
 						{{itemTicker.lastPrice}}</button>
 					<button class="btn sell" *ngIf="group.value == 'order'" [disabled]="!(tradeForm.valid)"
-						(click)="tradeAction()">Sell</button>
+						(click)="tradeAction($event)">Sell</button>
 				</div>
 				<div class="col-md-12 col-sm-12">
 					<div class="row">

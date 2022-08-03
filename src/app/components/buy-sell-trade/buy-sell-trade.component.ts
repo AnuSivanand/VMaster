@@ -83,7 +83,8 @@ export class BuySellTradeComponent implements OnInit {
     }
   }
 
-  tradeAction() {
+  tradeAction(event: any) {
+    event.target.disabled = true;
     let formValues = this.getTradeValues();
     let item = {
       "instrument_token": this.data.ticker.instrumentToken,
