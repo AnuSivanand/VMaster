@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConfirmPopupComponent } from 'src/app/components/confirm-popup/confirm-popup.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { interval } from 'rxjs';
+import { CloseOrderComponent } from './close-order/close-order.component';
 
 @Component({
   selector: 'app-trades',
@@ -23,10 +24,9 @@ export class TradesComponent implements OnInit {
   ) {
     this.dialogConfig = new MatDialogConfig();
     this.getTrades(this.tradeStatus);
-    interval(5000).subscribe(() => {
     
+    interval(5000).subscribe(() => {    
       //this.getTrades(this.tradeStatus);
-
     })
   }
 
@@ -61,7 +61,7 @@ export class TradesComponent implements OnInit {
       trade: trade,
       type: 'close'
     };
-    const dialogRef = this.matDialogRef.open(ConfirmPopupComponent, this.dialogConfig);
+    const dialogRef = this.matDialogRef.open(CloseOrderComponent, this.dialogConfig);
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result.status === 'closed') {
         this.getTrades(this.tradeStatus);

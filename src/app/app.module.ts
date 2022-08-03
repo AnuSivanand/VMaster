@@ -30,6 +30,7 @@ import { StockDeleteConfirmComponent } from './components/stock-delete-confirm/s
 import { CookieService } from 'ngx-cookie-service';
 import { EncryptDecryptService } from './shared/services/encrypt-decrypt/encrypt-decrypt.service';
 import { ConfirmPopupComponent } from './components/confirm-popup/confirm-popup.component';
+import { CloseOrderComponent } from './pages/trades/close-order/close-order.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ConfirmPopupComponent } from './components/confirm-popup/confirm-popup.
     PortfolioComponent,
     WatchlistFilterPipe,
     StockDeleteConfirmComponent,
-    ConfirmPopupComponent
+    ConfirmPopupComponent,
+    CloseOrderComponent
   ],
   imports: [
     BrowserModule,

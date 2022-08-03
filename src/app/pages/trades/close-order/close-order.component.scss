@@ -1,0 +1,53 @@
+button.delete {
+	width: 80px;
+	background: #26de81;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 5px;
+	box-shadow: 0px 0px 5px 0px #26de81ad;
+}
+button.action {
+	width: 100%;
+	background: #26de81;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 5px;
+	box-shadow: 0px 0px 5px 0px #26de81ad;
+}
+button.cancel {
+	width: 80px;
+	background: #ccc;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 5px;
+	box-shadow: 0px 0px 5px 0px #cfd0d1ad;
+}
+.disable {
+	background: #ccc;
+	color: #fff;
+	text-transform: uppercase;
+	margin: 0 5px;
+	box-shadow: 0px 0px 5px 0px #cfd0d1ad;
+	cursor: none;
+}
+.dialog-close {
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.popup {
+	width: 350px;
+}
+.popup-title {
+	font-size: 20px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+.title {
+	font-weight: 600;
+	font-size: 18px;
+	display: block;
+}
+.confirm-text {
+	padding-top: 15px;
+}
