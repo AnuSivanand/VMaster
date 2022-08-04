@@ -4,21 +4,23 @@
 			<i class="icon ion-md-close dialog-close"></i>
 		</a>
 	</div>
-	<div class="popup-title">{{trade.trading_symbol}}</div>
+	<div class="popup-title" style="text-align:center;">{{trade.trading_symbol}}</div>
 	<mat-dialog-content>
-		{{trade | json}}
 		<!-- <p class="confirm-text">Do you want to {{type}} the order <b>{{trade.trading_symbol}}</b>?</p> -->
-		<button class="btn action">Exit @ {{itemTicker?.lastPrice || 0}}</button>
+		<p><button (click)="tradeActionsClick()" style="margin-top:20px;margin-bottom:40px;font-weight: bolder;" class="btn action" [ngStyle]="{'background-color': (((itemTicker.lastPrice - trade.amount)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Buy'  && trade.exchange == 1">Exit {{trade.action}} @ {{(itemTicker.lastPrice - trade.amount)*trade.qty | number : '1.2-2'}}</button>
+		<button (click)="tradeActionsClick()" style="margin-top:20px;margin-bottom:40px;font-weight: bolder;" class="btn action" [ngStyle]="{'background-color': (((itemTicker.lastPrice - trade.amount)*trade.qty*trade.lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Buy' && trade.exchange == 2">Exit {{trade.action}} @ {{(itemTicker.lastPrice - trade.amount)*trade.qty*trade.lot_size | number : '1.2-2'}}</button>
+		<button (click)="tradeActionsClick()" style="margin-top:20px;margin-bottom:40px;font-weight: bolder;" class="btn action" [ngStyle]="{'background-color': (((trade.amount - itemTicker.lastPrice)*trade.qty) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell' && trade.exchange == 1">Exit {{trade.action}} @ {{(trade.amount - itemTicker.lastPrice)*trade.qty | number : '1.2-2'}}</button>
+		<button (click)="tradeActionsClick()" style="margin-top:20px;margin-bottom:40px;font-weight: bolder;" class="btn action" [ngStyle]="{'background-color': (((trade.amount - itemTicker.lastPrice)*trade.qty*trade.lot_size) >= 0 ) ? '#84ebb7' : '#f70c08'}" *ngIf="trade.action == 'Sell'  && trade.exchange == 2">Exit {{trade.action}} @ {{(trade.amount - itemTicker.lastPrice)*trade.qty*trade.lot_size | number : '1.2-2'}}</button></p>
 		<div class="col-md-12 col-sm-12" >
-			<div class="row">
-				<div class="col-md-6 col-sm-12 ticker-val-wrap">
+			<div class="row" style="background: #ccc;border-radius: 5px;text-align: center;">
+				<div class="col-md-6 col-sm-12 ticker-val-wrap" style="    margin-top: 10px;">
 					<p>Change: <span>{{itemTicker?.change || 0}}</span></p>
 					<p>High: <span>{{itemTicker.ohlc?.high || 0}}</span></p>
 					<p>Low: <span>{{itemTicker.ohlc?.low || 0}}</span></p>
 					<p>Open: <span>{{itemTicker.ohlc?.open || 0}}</span></p>
 					<p>Close: <span>{{itemTicker.ohlc?.close || 0}}</span></p>
 				</div>
-				<div class="col-md-6 col-sm-12 ticker-val-wrap">
+				<div class="col-md-6 col-sm-12 ticker-val-wrap" style="    margin-top: 10px;">
 					<p>Volume: <span>{{itemTicker?.volume || 0}}</span></p>
 					<p>Avg Price: <span>{{itemTicker?.averagePrice || 0}}</span></p>
 					<p>Buy Quantity: <span>{{itemTicker?.buyQuantity || 0}}</span></p>
@@ -28,7 +30,7 @@
 		</div>
 	</mat-dialog-content>
 	<div align="end">
-		<button class="btn cancel" (click)="cancelClick()">Cancel</button>
-		<button class="btn delete" (click)="tradeActionsClick()">Close</button>
+		<!--<button class="btn cancel" (click)="cancelClick()">Cancel</button>
+		<button class="btn delete" (click)="tradeActionsClick()">Close</button>-->
 	</div>
 </div>
