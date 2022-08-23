@@ -39,7 +39,8 @@ export class CloseOrderComponent implements OnInit {
     this.dialogRef.close(false);
   }
 
-  tradeActionsClick() {
+  tradeActionsClick(event: any) {
+    event.target.hidden = true;
     if (this.type === 'cancel') {
       this.tradeCancel();
     } else if (this.type === 'close') {
