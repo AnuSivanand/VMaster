@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -63,7 +64,10 @@ import { CloseOrderComponent } from './pages/trades/close-order/close-order.comp
     FormsModule,
     ReactiveFormsModule,
     PagesWrapperModule,
-    IvyCarouselModule
+    IvyCarouselModule,
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true
+    })
   ],
   providers: [
     EncryptDecryptService,
