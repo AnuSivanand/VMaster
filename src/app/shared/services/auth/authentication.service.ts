@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { Constants } from '../../common/constant';
 
@@ -16,7 +17,8 @@ export class AuthenticationService {
 
   constructor(
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService,
   ) { }
 
   login(user: any): Observable<any> {
@@ -28,7 +30,6 @@ export class AuthenticationService {
     localStorage.setItem("ticker_access_token", loginResp.tickerToken)
     localStorage.setItem("current_user_email", loginResp.user?.email);
     localStorage.setItem("current_user", JSON.stringify(loginResp.user));
-    //sessionStorage.setItem("current_user", JSON.stringify(loginResp.user));
     this.user = loginResp.user;
     this.logged.next(this.user);
   }
@@ -42,7 +43,6 @@ export class AuthenticationService {
     localStorage.removeItem("ticker_access_token");
     localStorage.removeItem("current_user_email");
     localStorage.removeItem("current_user");
-    //sessionStorage.removeItem("current_user");
     this.router.navigateByUrl("/login");
   }
 

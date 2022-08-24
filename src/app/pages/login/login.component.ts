@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 import { EncryptDecryptService } from 'src/app/shared/services/encrypt-decrypt/encrypt-decrypt.service';
+import { TermsConditionComponent } from './terms-condition/terms-condition.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private toastrService: ToastrService,
     private cookieService: CookieService,
-    private encryptDecryptService: EncryptDecryptService
+    private encryptDecryptService: EncryptDecryptService,
+    private matDialogRef: MatDialog,
   ) {
     this.loginForm = this.loginFormBuilder.group({
       email: new FormControl('', [Validators.required]),
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit {
     } else {
       let loggedUserDetails = this.cookieService.get('user_details') || '{}';
       let decryptUserDetails = this.encryptDecryptService.get('user_details', loggedUserDetails);
-      this.userDetails = JSON.parse(decryptUserDetails);
+      this.userDetails = decryptUserDetails ? JSON.parse(decryptUserDetails) : {};
       if (this.userDetails && this.userDetails.rememberMe) {
         this.loginForm.patchValue({
           email: this.userDetails.email,
@@ -71,18 +74,36 @@ export class LoginComponent implements OnInit {
 
   onLoginSuccess(resp: any) {
     if (resp && resp.success) {
-      const loginCredentials = this.loginForm.getRawValue();
-      if (loginCredentials.rememberMe) {
-        let encryptUserDetails = this.encryptDecryptService.set('user_details', JSON.stringify(loginCredentials));
-        this.cookieService.set('user_details', encryptUserDetails, 30);
+      let termsAccepted = this.cookieService.get('terms_accepted');
+      if (termsAccepted && termsAccepted == 'true') {
+        this.doProceedLogin(resp);
       } else {
-        this.cookieService.delete('user_details');
+        const dialogRef = this.matDialogRef.open(TermsConditionComponent);
+        dialogRef.afterClosed().subscribe((result: any) => {
+          if (result.accepted) {
+            this.doProceedLogin(resp);
+          }
+        });
       }
-      this.authService.loginSuccess(resp);
-      this.router.navigate(["/watchlist"]);
     } else {
       this.toastrService.error(resp.message);
     }
+  }
+
+  doProceedLogin(resp: any) {
+    const loginCredentials = this.loginForm.getRawValue();
+    let date = new Date(),
+      midnight = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59);
+    this.cookieService.set("terms_accepted", 'true', { expires: midnight });
+
+    if (loginCredentials.rememberMe) {
+      let encryptUserDetails = this.encryptDecryptService.set('user_details', JSON.stringify(loginCredentials));
+      this.cookieService.set('user_details', encryptUserDetails, 30);
+    } else {
+      this.cookieService.delete('user_details');
+    }
+    this.authService.loginSuccess(resp);
+    this.router.navigate(["/watchlist"]);
   }
 
 }
