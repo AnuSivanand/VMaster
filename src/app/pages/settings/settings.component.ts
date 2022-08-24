@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { CustomValidators } from 'src/app/shared/common/CustomValidators';
 import { ApiService } from 'src/app/shared/services/api/api.service';
+import { AuthenticationService } from 'src/app/shared/services/auth/authentication.service';
 
 @Component({
   selector: 'app-settings',
@@ -16,7 +17,8 @@ export class SettingsComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private authService: AuthenticationService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +45,9 @@ export class SettingsComponent implements OnInit {
     this.apiService.changePassword(changePassItem).subscribe((resp) => {
       if (resp && resp.status) {
         this.toastrService.success(resp.message);
+        this.authService.logout().subscribe((resp) => {
+          this.authService.finishLogout();
+        });
       }
     });
   };

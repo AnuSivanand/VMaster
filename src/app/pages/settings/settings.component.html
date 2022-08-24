@@ -7,17 +7,17 @@
           <form [formGroup]="changePassForm">
             <div class="col-md-12 info-wrap">
               <label> Current password </label>
-              <input type="text" class="form-control" placeholder="Enter your password"
+              <input type="password" class="form-control" placeholder="Enter your password"
                 formControlName="currentPassword" />
             </div>
             <div class="col-md-12 info-wrap"> <label for="newPass">New password</label>
-              <input type="text" class="form-control" placeholder="Enter new password" formControlName="newPassword" />
+              <input type="password" class="form-control" placeholder="Enter new password" formControlName="newPassword" />
               <div class="validation-warn-msg" *ngIf="formValues.newPassword.errors?.['minlength']">
                 Password should have minimum 6 characters
               </div>
             </div>
             <div class="col-md-12 info-wrap"> <label for="newPass">Confirm New password</label>
-              <input type="text" class="form-control" placeholder="Enter new password"
+              <input type="password" class="form-control" placeholder="Enter new password"
                 formControlName="confirmNewPassword" />
               <div class="validation-warn-msg" *ngIf="formValues.confirmNewPassword?.errors?.mustMatch">
                 Password and confirm not match
