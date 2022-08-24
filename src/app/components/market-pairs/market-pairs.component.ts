@@ -25,6 +25,7 @@ export class MarketPairsComponent implements OnInit {
   public dropdownSettings: IDropdownSettings = {};
   public loading: boolean = false;
   public exchangeType: String = 'MCX';
+  public showdelete: boolean = true;
 
   constructor(    
     private matDialogRef: MatDialog,
@@ -145,12 +146,14 @@ export class MarketPairsComponent implements OnInit {
   }
 
   onDeleteStockItem(ticker: any) {
+    this.showdelete = false;
     const dialogRef = this.matDialogRef.open(StockDeleteConfirmComponent, {
       disableClose: true,
       data: {'ticker': ticker, 'type': this.exchangeType} 
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result.deleteStatus) {
+        this.showdelete = true;
         this.ngOnInit();
       }
     });

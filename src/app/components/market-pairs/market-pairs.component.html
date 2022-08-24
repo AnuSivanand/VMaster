@@ -35,7 +35,7 @@
               <div class="col-md-12 col-sm-12">
                 <span class="trade-name fw-bold">{{tickerVal.stockName}}</span>
                 <span class="val-wrap-green" style="font-size: 17px;">LTP : {{tickerVal.lastPrice}}</span>
-                <span class="material-symbols-outlined cursor-pointer delete-icon" style="float: right;" (click)="onDeleteStockItem(tickerVal)"> delete_forever </span>
+                <span class="material-symbols-outlined cursor-pointer delete-icon" *ngIf="showdelete" style="float: right;" (click)="onDeleteStockItem(tickerVal)"> delete_forever </span>
               </div>
             </div>
             <div class="row close-trade-row">

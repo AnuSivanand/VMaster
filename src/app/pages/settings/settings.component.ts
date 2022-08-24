@@ -43,11 +43,16 @@ export class SettingsComponent implements OnInit {
       'new-password': formVal.newPassword
     }
     this.apiService.changePassword(changePassItem).subscribe((resp) => {
-      if (resp && resp.status) {
+      if (resp && resp.status === true) {
         this.toastrService.success(resp.message);
-        this.authService.logout().subscribe((resp) => {
+        setTimeout(()=>{
+          this.authService.logout().subscribe((resp) => {
           this.authService.finishLogout();
-        });
+          });
+        },1000);
+        
+      } else {
+        this.toastrService.error(resp.message);
       }
     });
   };
