@@ -7,7 +7,7 @@ import { Constants } from '../../shared/common/constant';
 import { BuySellTradeComponent } from '../buy-sell-trade/buy-sell-trade.component';
 import { ApiService } from 'src/app/shared/services/api/api.service';
 import { StockDeleteConfirmComponent } from '../stock-delete-confirm/stock-delete-confirm.component';
-
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-market-pairs',
@@ -26,6 +26,7 @@ export class MarketPairsComponent implements OnInit {
   public loading: boolean = false;
   public exchangeType: String = 'MCX';
   public showdelete: boolean = true;
+  public interval: any;
 
   constructor(    
     private matDialogRef: MatDialog,
@@ -44,6 +45,14 @@ export class MarketPairsComponent implements OnInit {
   ngOnInit(): void {
     this.getWatchlist();
     this.getFavouriteFutureList();
+    this.interval = interval(5000).subscribe(() => {
+      this.getFavouriteFutureList();
+    })
+  }
+
+  ngOnDestroy() {
+    // Will clear when component is destroyed e.g. route is navigated away from.
+    this.interval.unsubscribe();
   }
 
   getWatchlist() {
@@ -83,12 +92,39 @@ export class MarketPairsComponent implements OnInit {
 
   getTickerValues(items: any) {
     this.loading = true;
-    let ticker = new KiteTicker({
+    this.favouriteFutureStocks = this.favouriteFutureStocks.map((item: any) => {
+      item.instrument_details = JSON.parse(item.instrument_details);
+      return {
+        id: item.instrument_token,
+        instrument_token: item.instrument_token,
+        stockName: item.trading_symbol,
+        trading_symbol: item.trading_symbol,
+        averagePrice: item.instrument_details.average_traded_price,
+        buyQuantity: item.instrument_details.total_buy_quantity,
+        depth: item.instrument_details.depth,
+        instrumentToken: item.instrument_details.instrument_token,
+        lastPrice: item.instrument_details.last_price,
+        lastQuantity: item.instrument_details.last_traded_quantity,
+        lastTradeTime: item.instrument_details.last_trade_time,
+        mode: item.instrument_details.mode,
+        ohlc: item.instrument_details.ohlc,
+        oi: item.instrument_details.oi,
+        oiDayHigh: item.instrument_details.oi_day_high,
+        oiDayLow: item.instrument_details.oi_day_low,
+        sellQuantity: item.instrument_details.total_sell_quantity,
+        timestamp: item.instrument_details.exchange_timestamp,
+        tradable: item.instrument_details.last_traded_quantity,
+        volume: item.instrument_details.volume_traded,
+        change: ((item.instrument_details.last_price - item.instrument_details.ohlc.close) * 100 / item.instrument_details.ohlc.close).toFixed(2)
+      }
+    });
+    /*let ticker = new KiteTicker({
       apiKey: Constants.API_KEY,
       accessToken: localStorage.getItem('ticker_access_token') || ""
     });
     ticker.on('ticks', (ticks: TickFull) => {
       this.tickerValues = ticks;
+      console.log(this.favouriteFutureStocks);
       this.favouriteFutureStocks = this.favouriteFutureStocks.map((item: any) => {
         let currentItem = this.tickerValues.find((newItem: any) => {
           return item.instrument_token === newItem.instrumentToken;
@@ -121,12 +157,13 @@ export class MarketPairsComponent implements OnInit {
           return item;
         }
       });
+      console.log(this.favouriteFutureStocks);
     });
     ticker.on('connect', () => {
       ticker.subscribe(items);
       ticker.setMode(ticker.modeFull, items);
     });
-    ticker.connect();
+    ticker.connect();*/
     this.loading = false;
   }
 
