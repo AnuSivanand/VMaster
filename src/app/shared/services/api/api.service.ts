@@ -69,4 +69,8 @@ export class ApiService {
   sellOrder(): Observable<any> {
     return this.httpClient.get(this.baseUrl + "sell_order");
   }
+
+  getFavuoriteStocksSingle(selectedTickerId: String): Observable<any> {
+    return this.httpClient.get(this.baseUrl + "get_favourites_list_single?instrument_id=" + selectedTickerId);
+  }
 }
