@@ -99,7 +99,7 @@ export class BuySellTradeComponent implements OnInit {
     let item = {
       "instrument_token": this.data.ticker.instrumentToken,
       "quantity": formValues.quantity,
-      "amount": this.equity == 'market' ? this.data.ticker.lastPrice : formValues.lastPrice,
+      "amount": this.equity == 'market' ? this.itemTicker.lastPrice : formValues.lastPrice,
       "type": this.equity == 'market' ? 1 : 2,
       "instrument_details": JSON.stringify(this.data.ticker),
       "action": this.data.type == 'buy' ? 1 : 2
@@ -131,6 +131,7 @@ export class BuySellTradeComponent implements OnInit {
       item.instrument_details = JSON.parse(item.instrument_details);
       this.itemTicker = {
         id: this.data.ticker.instrument_token,
+        exchange: this.data.ticker.exchange,
         instrument_token: this.data.ticker.instrument_token,
         stockName: this.data.ticker.trading_symbol,
         trading_symbol: this.data.ticker.trading_symbol,

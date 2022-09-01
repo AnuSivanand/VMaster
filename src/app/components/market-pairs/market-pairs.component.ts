@@ -45,7 +45,7 @@ export class MarketPairsComponent implements OnInit {
   ngOnInit(): void {
     this.getWatchlist();
     this.getFavouriteFutureList();
-    this.interval = interval(5000).subscribe(() => {
+    this.interval = interval(10000).subscribe(() => {
       this.getFavouriteFutureList();
     })
   }
@@ -96,6 +96,7 @@ export class MarketPairsComponent implements OnInit {
       item.instrument_details = JSON.parse(item.instrument_details);
       return {
         id: item.instrument_token,
+        exchange: item.exchange,
         instrument_token: item.instrument_token,
         stockName: item.trading_symbol,
         trading_symbol: item.trading_symbol,
@@ -179,6 +180,7 @@ export class MarketPairsComponent implements OnInit {
       type: type,
       ticker: ticker
     };
+    console.log(this.dialogConfig.data);
     this.matDialogRef.open(BuySellTradeComponent, this.dialogConfig);
   }
 
