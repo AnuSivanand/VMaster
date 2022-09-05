@@ -128,9 +128,11 @@ export class BuySellTradeComponent implements OnInit {
 
     this.apiService.getFavuoriteStocksSingle(selectedTickerId).subscribe((resp) => {
       var item = resp.favourites[0];
+      console.log(this.data.ticker);
       item.instrument_details = JSON.parse(item.instrument_details);
       this.itemTicker = {
         id: this.data.ticker.instrument_token,
+        lot_size: item.lot_size,
         exchange: this.data.ticker.exchange,
         instrument_token: this.data.ticker.instrument_token,
         stockName: this.data.ticker.trading_symbol,

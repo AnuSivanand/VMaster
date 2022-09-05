@@ -97,6 +97,7 @@ export class MarketPairsComponent implements OnInit {
       return {
         id: item.instrument_token,
         exchange: item.exchange,
+        lot_size: item.lot_size,
         instrument_token: item.instrument_token,
         stockName: item.trading_symbol,
         trading_symbol: item.trading_symbol,
